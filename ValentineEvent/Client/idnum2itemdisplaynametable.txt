@@ -1,0 +1,14 @@
+idnum2itemdisplaynametable.txt
+//Valentine 2019 Items
+@b1#Radiating_Heart#
+@b2#Explosive_Heart#
+@b3#Cold_Heart#
+@b4#Beefy_Heart#
+@b5#Beating_Heart#
+@b6#Plump_Heart#
+@b7#Tough_Heart#
+@b8#Enchanted_Heart#
+@b9#Ghastly_Heart#
+@b10#Sprouting_Love_Letter# 
+@b11#Sprouting_Egg# 
+@b12#Sprouting_Hat#

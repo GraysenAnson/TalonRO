@@ -1,0 +1,77 @@
+//===== eAthena Script =======================================
+//= TalonRO's Easter 2019 Filler NPCs
+//===== By: ==================================================
+//= ZoneSoldier
+//===== Description: =========================================
+//= Filler NPC script for Easter 2019
+//============================================================
+
+izlude,129,160,4	script	Suspicious Man#SusMan	456,{
+	mes "[Suspicious Man]";
+	mes "I think i should take a bath soon....";
+	close;
+}
+
+izlude,126,166,4	script	Chicken Child#CC1	10235,{
+	set .@playerName$, strcharinfo(0);
+	
+	emotion e_sob;
+	mes "[Chicken Child]";
+	mes "M m m m m m m m m m m m mommy!!!";
+	next;
+	mes "[Chicken Child]";
+	mes "Sniff, sniff...";
+	mes "Have you blok blok seen my m m m m m m m m m m mommy??";
+	next;
+	switch(select("Are you ok? :Quit")){
+		case 1:
+			mes "["+.@playerName$+"]";
+			mes "Are you ok?";
+			next;
+			emotion e_omg;
+			mes "[Chicken Child]";
+			mes "S s s s s s s s stranger blok blok stay away!!!!";
+			close;
+		case 2:
+			emotion e_sob;
+			mes "[Chicken Child]";
+			mes "Where's my blok blok m m m m m m m m m m m mommy??";
+			mes "Sniff.. Sniff";
+			close;
+	}	
+}
+
+izlude,122,159,4	script	White Bun#WB1	10206,{
+	set .@playerName$, strcharinfo(0);
+	
+	mes "[White Bun]";
+	mes "Squeak squeak!";
+	next;
+	mes "[White Bun]";
+	mes "Squeak squeak squeeeeak! squeak! squeak!";
+	next;
+	switch(select("Squeak? :Squeak~ :Squawk!")){
+		case 1:
+			emotion e_ok;
+			mes "[White Bun]";
+			mes "Squeak squeak!";
+			mes "Squee squeak, squeak squeak squeeeak?";
+			next;
+			mes "["+.@playerName$+"]";
+			mes "Um squeak?";
+			next;
+			emotion e_dots;
+			mes "The white bun appears to be squeaking to itself now.";	
+			close;
+		case 2:
+			emotion e_shy;
+			mes "[White Bun]";
+			mes "Squeak Squeak~";
+			close;
+		case 3:
+			emotion e_omg;
+			mes "[White Bun]";
+			mes "Sqeeeeak!!";
+			close;
+}
+}

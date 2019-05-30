@@ -1,0 +1,13 @@
+idnum2itemresnametable.txt
+@b1#프레임하트# //Radiating Heart
+@b2#불타는심장# //Explosive Heart
+@b3#얼음심장# //Cold Heart
+@b4#인어의심장# //Beefy Heart
+@b5#하트머리핀# //Beating Heart
+@b6#바늘쌈지# //Plump Heart
+@b7#돌심장# // Tough Heart
+@b8#챰오브프레임하트# //Enchanted Heart
+@b9#액토플라즘# //Ghastly Heart
+@b10## //Sprouting Love Letter - Same as item 8602
+@b11## //Sprouting Egg
+@b12## //Sprouting Hat Costume

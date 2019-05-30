@@ -1,0 +1,2 @@
+//Sprouting pet - Clone of Poring(1002)
+2998,V_SPROUTING,Sprouting,619,9001,10013,531,80,60,50,100,250,20,2000,150,1,0,350,400,800,{ petloot 10; },{ bonus bLuk,2; bonus bCritical,1; }

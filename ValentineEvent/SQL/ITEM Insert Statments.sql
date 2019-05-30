@@ -1,0 +1,12 @@
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b1', 'Radiating_Heart', 'Radiating Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b2', 'Explosive_Heart', 'Explosive Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b3', 'Cold_Heart', 'Cold Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b4', 'Beefy_Heart', 'Beefy Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b5', 'Beating_Heart', 'Beating Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b6', 'Plump_Heart', 'Plump Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b7', 'Tough_Heart', 'Tough Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b8', 'Enchanted_Heart', 'Enchanted Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b9', 'Ghastly_Heart', 'Ghastly Heart', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b10', 'Sprouting_Love_Letter', 'Sprouting Love Letter', '3', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`) VALUES ('@b11', 'Sprouting_Egg', 'Sprouting Egg', '7', '0');
+INSERT INTO `ragnarok`.`item_db` (`id`, `name_english`, `name_japanese`, `type`, `weight`, `equip_genders`, `equip_locations`) VALUES ('b12', 'Sprouting_Hat', 'Sprouting Hat', '4', '0', '2', '1024');

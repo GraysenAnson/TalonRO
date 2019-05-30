@@ -1,0 +1,11 @@
+//valentine 20019
+@a1,2897,0 //Teddyring
+@a2,1904,0 //Bombering
+@a3,2871,0 //Icering
+@a4,2853,0 //Cowring
+@a5,2880,0 //Nekoring
+@a6,2881,0 //Pandaring
+@a7,3552,0 //Orcring
+@a8,3204,0 //Pixyring
+@a9,2900,0 //Whispering
+@a10,@sprouting,0 //Sprouting

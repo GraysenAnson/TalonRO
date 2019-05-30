@@ -1,0 +1,66 @@
+idnum2itemdesctable.txt
+@b1#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b1^000000
+#
+@b2#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b2^000000
+#
+@b3#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b3^000000
+#
+@b4#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b4^000000
+#
+@b5#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b5^000000
+#
+@b6#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b6^000000
+#
+@b7#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b7^000000
+#
+@b8#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b8^000000
+#
+@b9#
+A blobby organ; said to hold the compassion of a ring.
+Weight :^777777 0^000000
+ID :^777777 @b9^000000
+#
+b10#
+An intimate love letter written in goo.
+Weight :^777777 0^000000
+ID :^777777 b10^000000
+#
+@b11#
+An egg that has a charming pet Sprouting sleeping in it. Can be hatched by using a ^33CC33Pet Incubator^000000.
+^0000FFLoyal Bonus^000000
+When summoned,
+Recovers 2 HP/SP every 2 seconds, HP/SP regeneration +10%
+MaxHP +300
+Class :^777777 Monster Egg^000000
+Weight :^777777 0^000000
+ID :^777777 @b11^000000
+#
+@b12#
+A delecately crafted hat made from real foliage, worn to unite a Sprouting with its owner.
+Weight :^777777 0^000000
+ID :^777777 @b12^000000
+#

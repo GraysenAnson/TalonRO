@@ -1,0 +1,162 @@
+//===== TalonRO Event Script =========================================
+//= NPC Filled Arena 
+//===== Event Creator ================================================
+//= GM Lance
+//===== Programmer ===================================================
+//= ZoneSoldier
+//===== Description ==================================================
+//= Arena Map filled with different NPCS on map pvp_n_6-5.
+//===== End ==========================================================
+
+
+//===== Valkyrie and Guards ==========================================
+//North
+pvp_n_6-5,99,118,4	script	Valkyrie Herja#A0	811,{end;}
+pvp_n_6-5,96,117,5	script	Asguardian#A1	966,{end;}
+pvp_n_6-5,102,117,4	script	Asguardian#A2	966,{end;}
+//South
+pvp_n_6-5,97,84,5	script	Asguardian#A3	966,{end;}
+pvp_n_6-5,102,84,4	script	Asguardian#A4	966,{end;}
+//East
+pvp_n_6-5,119,102,4	script	Asguardian#A5	966,{end;}
+pvp_n_6-5,119,97,4	script	Asguardian#A6	966,{end;}
+//West
+pvp_n_6-5,80,102,5	script	Asguardian#A7	966,{end;}
+pvp_n_6-5,80,97,5	script	Asguardian#A8	966,{end;}
+
+//===== Top Left Section =============================================
+//Asguardians
+pvp_n_6-5,92,117,5	script	Asguardian#A9	650,{end;}
+pvp_n_6-5,90,117,5	script	Asguardian#A10	594,{end;}
+pvp_n_6-5,89,117,5	script	Asguardian#A11	643,{end;}
+pvp_n_6-5,87,117,5	script	Asguardian#A12	632,{end;}
+pvp_n_6-5,85,117,5	script	Asguardian#A13	676,{end;}
+pvp_n_6-5,86,116,5	script	Asguardian#A14	555,{end;}
+pvp_n_6-5,84,113,5	script	Asguardian#A15	624,{end;}
+pvp_n_6-5,82,113,5	script	Asguardian#A16	494,{end;}
+pvp_n_6-5,81,112,5	script	Asguardian#A17	87,{end;}
+pvp_n_6-5,81,111,5	script	Asguardian#A18	72,{end;}
+pvp_n_6-5,82,108,5	script	Asguardian#A19	667,{end;}
+pvp_n_6-5,80,109,5	script	Asguardian#A20	648,{end;}
+pvp_n_6-5,81,108,5	script	Asguardian#A21	411,{end;}
+pvp_n_6-5,81,106,5	script	Asguardian#A22	748,{end;}
+pvp_n_6-5,80,106,5	script	Asguardian#A23	453,{end;}
+pvp_n_6-5,81,104,5	script	Asguardian#A24	520,{end;}
+pvp_n_6-5,81,103,5	script	Asguardian#A25	521,{end;}
+//Monsters
+pvp_n_6-5,95,117,5	script	Piamette#M1	1930,{end;}
+pvp_n_6-5,94,118,5	script	Thanatos#M2	1708,{end;}
+pvp_n_6-5,91,118,5	script	Mistress of Shelter#M3	1701,{end;}
+pvp_n_6-5,87,118,5	script	Bloody Knight#M4	1268,{end;}
+pvp_n_6-5,89,115,5	script	Orc Lord#M5	1190,{end;}
+pvp_n_6-5,87,113,5	script	Kuma#M6	1622,{end;}
+pvp_n_6-5,85,111,5	script	Mistress#M7	1059,{end;}
+pvp_n_6-5,83,109,5	script	Drake#M8	969,{end;}
+pvp_n_6-5,81,114,5	script	Dark Lord#M9	737,{end;}
+
+//===== Top Right Section ============================================
+//Asguardians
+pvp_n_6-5,103,117,4	script	Asguardian#A26	683,{end;}
+pvp_n_6-5,105,117,4	script	Asguardian#A27	646,{end;}
+pvp_n_6-5,106,117,4	script	Asguardian#A28	625,{end;}
+pvp_n_6-5,108,117,4	script	Asguardian#A29	628,{end;}
+pvp_n_6-5,110,117,4	script	Asguardian#A30	604,{end;}
+pvp_n_6-5,112,117,4	script	Asguardian#A31	479,{end;}
+pvp_n_6-5,112,117,4	script	Asguardian#A32	479,{end;}
+pvp_n_6-5,108,114,4	script	Asguardian#A33	459,{end;}
+pvp_n_6-5,112,113,4	script	Asguardian#A34	491,{end;}
+pvp_n_6-5,116,114,4	script	Asguardian#A35	107,{end;}
+pvp_n_6-5,116,111,4	script	Asguardian#A36	678,{end;}
+pvp_n_6-5,118,114,4	script	Asguardian#A37	435,{end;}
+pvp_n_6-5,118,110,4	script	Asguardian#A38	63,{end;}
+pvp_n_6-5,118,107,4	script	Asguardian#A39	430,{end;}
+pvp_n_6-5,117,102,4	script	Asguardian#A40	440,{end;}
+pvp_n_6-5,118,102,4	script	Asguardian#A41	436,{end;}
+pvp_n_6-5,118,103,4	script	Asguardian#A42	441,{end;}
+pvp_n_6-5,117,104,4	script	Asguardian#A43	437,{end;}
+pvp_n_6-5,118,104,4	script	Asguardian#A44	438,{end;}
+pvp_n_6-5,118,105,4	script	Asguardian#A45	439,{end;}
+//Monsters
+pvp_n_6-5,104,118,4	script	Moonlight Flower#M10	1150,{end;}
+pvp_n_6-5,109,118,4	script	Lord of Death#M12	1876,{end;}
+pvp_n_6-5,114,118,4	script	Zealotus#M13	1200,{end;}
+pvp_n_6-5,106,115,4	script	Paladin Randel#M14	2235,{end;}
+pvp_n_6-5,110,114,4	script	White Lady#M15	1518,{end;}
+pvp_n_6-5,112,111,4	script	Hill Wind#M16	1629,{end;}
+pvp_n_6-5,114,112,4	script	Lhupe#M17	567,{end;}
+pvp_n_6-5,114,109,4	script	Goblin Leader#M18	1299,{end;}
+pvp_n_6-5,116,107,4	script	Not Eddga#M19	505,{end;}
+pvp_n_6-5,118,116,4	script	Pharaoh#M20	1157,{end;}
+
+//===== Bottom Left Section ==========================================
+//Asguardians
+pvp_n_6-5,81,97,5	script	Asguardian#A46	530,{end;}
+pvp_n_6-5,81,96,5	script	Asguardian#A47	544,{end;}
+pvp_n_6-5,80,95,5	script	Asguardian#A48	588,{end;}
+pvp_n_6-5,82,95,5	script	Asguardian#A49	615,{end;}
+pvp_n_6-5,81,91,5	script	Asguardian#A50	612,{end;}
+pvp_n_6-5,80,91,5	script	Asguardian#A51	635,{end;}
+pvp_n_6-5,82,90,5	script	Asguardian#A52	882,{end;}
+pvp_n_6-5,81,89,5	script	Asguardian#A53	691,{end;}
+pvp_n_6-5,80,88,5	script	Asguardian#A54	735,{end;}
+pvp_n_6-5,81,85,5	script	Asguardian#A55	759,{end;}
+pvp_n_6-5,80,84,5	script	Asguardian#A56	448,{end;}
+pvp_n_6-5,86,89,5	script	Asguardian#A57	688,{end;}
+pvp_n_6-5,91,86,4	script	Asguardian#A58	432,{end;}
+pvp_n_6-5,92,84,5	script	Asguardian#A59	813,{end;}
+pvp_n_6-5,94,84,5	script	Asguardian#A60	832,{end;}
+pvp_n_6-5,87,87,5	script	Asguardian#A61	889,{end;}
+pvp_n_6-5,95,85,5	script	Asguardian#A62	997,{end;}
+pvp_n_6-5,96,84,5	script	Asguardian#A63	874,{end;}
+pvp_n_6-5,90,84,5	script	Asguardian#A64	803,{end;}
+pvp_n_6-5,90,84,5	script	Asguardian#A65	803,{end;}
+pvp_n_6-5,88,84,5	script	Asguardian#A66	795,{end;}
+pvp_n_6-5,86,84,5	script	Asguardian#A67	720,{end;}
+pvp_n_6-5,84,88,5	script	Asguardian#A68	821,{end;}
+pvp_n_6-5,87,84,5	script	Asguardian#A69	753,{end;}
+//Monsters
+pvp_n_6-5,81,93,5	script	Waifu#M21	586,{end;}
+pvp_n_6-5,82,92,5	script	Miyabi Doll#M22	1552,{end;}
+pvp_n_6-5,84,91,5	script	Turtle General#M23	1075,{end;}
+pvp_n_6-5,81,86,5	script	Knight of Windstorm#M24	1251,{end;}
+pvp_n_6-5,89,86,5	script	Green Maiden#M25	1631,{end;}
+pvp_n_6-5,90,86,5	script	Wanderer#M26	1490,{end;}
+pvp_n_6-5,89,81,5	script	Evil Snake Lord#M27	1418,{end;}
+pvp_n_6-5,84,82,5	script	Amon Ra#M28	1511,{end;}
+pvp_n_6-5,85,90,5	script	Harpy#M29	1376,{end;}
+
+//===== Bottom Right Section =========================================
+//Asugardians
+pvp_n_6-5,118,97,4	script	Asguardian#A70	447,{end;}
+pvp_n_6-5,117,96,4	script	Asguardian#A71	618,{end;}
+pvp_n_6-5,118,94,4	script	Asguardian#A72	605,{end;}
+pvp_n_6-5,119,92,4	script	Asguardian#A73	640,{end;}
+pvp_n_6-5,119,92,4	script	Asguardian#A74	640,{end;}
+pvp_n_6-5,118,90,4	script	Asguardian#A75	713,{end;}
+pvp_n_6-5,117,89,4	script	Asguardian#A76	971,{end;}
+pvp_n_6-5,118,85,4	script	Asguardian#A77	742,{end;}
+pvp_n_6-5,114,87,4	script	Asguardian#A78	725,{end;}
+pvp_n_6-5,112,86,4	script	Asguardian#A79	909,{end;}
+pvp_n_6-5,112,86,4	script	Asguardian#A80	909,{end;}
+pvp_n_6-5,113,84,4	script	Asguardian#A81	705,{end;}
+pvp_n_6-5,111,84,4	script	Asguardian#A82	741,{end;}
+pvp_n_6-5,110,85,4	script	Asguardian#A83	998,{end;}
+pvp_n_6-5,110,84,4	script	Asguardian#A84	8,{end;}
+pvp_n_6-5,109,84,4	script	Asguardian#A85	808,{end;}
+pvp_n_6-5,104,84,4	script	Asguardian#A86	852,{end;}
+pvp_n_6-5,105,84,4	script	Asguardian#A87	940,{end;}
+pvp_n_6-5,106,84,4	script	Asguardian#A88	826,{end;}
+pvp_n_6-5,107,85,4	script	Asguardian#A89	994,{end;}
+pvp_n_6-5,107,84,4	script	Asguardian#A90	789,{end;}
+//Monsters
+pvp_n_6-5,119,96,4	script	Twitchy#M30	488,{end;}
+pvp_n_6-5,117,92,4	script	Owl Baron#M31	1295,{end;}
+pvp_n_6-5,115,90,4	script	Incubus#M32	1580,{end;}
+pvp_n_6-5,114,89,4	script	Succubus#M33	1370,{end;}
+pvp_n_6-5,118,87,4	script	Baphomet#M34	736,{end;}
+pvp_n_6-5,119,84,4	script	Dame of Sentinel#M35	1700,{end;}
+pvp_n_6-5,112,88,4	script	Orc Hero#M36	1087,{end;}
+pvp_n_6-5,109,87,4	script	Lolo Ruri#M37	1892,{end;}
+pvp_n_6-5,103,81,4	script	Maya#M38	1147,{end;}
+pvp_n_6-5,108,82,4	script	Gold Queen Scaraba#M39	2165,{end;}
+pvp_n_6-5,115,82,4	script	Incantation Samurai#M40	1492,{end;}

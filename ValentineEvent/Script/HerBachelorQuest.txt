@@ -1,0 +1,535 @@
+//===== TalonRO Event Script =======================================
+//= Valentine 2019 - Her Bachelor Quest
+//===== Event Creator ======================================================
+//= Gm Zelda
+//===== Programmer ===================================================
+//= ZoneSoldier
+//===== Assets =======================================================
+//= https://rathena.org/board/files/file/3754-sprouting-set/
+//===== End ==========================================================
+
+//Poringa NPC
+prontera,147,175,4	script	Poringa	3555,{
+		if(QVAL==1){
+			if(countitem(@b1)>15 && countitem(@b2)>15 && countitem(@b3)>15 && countitem(@b4)>15 && countitem(@b5)>15 && countitem(@b6)>15 && countitem(@b7)>15 && countitem(@b8)>15 && countitem(@b9)>15){
+				mes "[Poringa]";
+				mes "Have you collected all the hearts I've requested?";
+				mes "Mmm.. Mmh.. Oh wow!";
+				mes "This is delightful! Give me a moment to take these off your hands and... .... .... ...";
+				next;
+				mes "Noym-nom! Delicious.";
+				mes "I don't think any of these bachelorings have what it takes to tickle my blob.";
+				next;
+				mes "[Poringa]";
+				mes "... However, there are these handsome little flubbers known as Sproutings -- renowned for their charm!";
+				next;
+				set QVAL,2;
+				delitem @b1,15; //Radiating Heart
+				delitem @b2,15; //Explosive Heart
+				delitem @b3,15; //Cold Heart
+				delitem @b4,15; //Beefy Heart
+				delitem @b5,15; //Beating Heart
+				delitem @b6,15; //Plump Heart
+				delitem @b7,15; //Tough Heart
+				delitem @b8,15; //Enchanted Heart
+				delitem @b9,15; //Ghastly Heart
+				mes "[Poringa]";
+				mes "Do you mind finding this elusive blob so we can unite our blubs and blob-blob-blob across the blob? ";
+				mes "Last I heard, they situate in scenic environments reciting poems as they wait for their one true blobb..";
+				close;
+			}
+			else{
+				mes "[Poringa]";
+				mes "I need"; 
+				mes "15x ^3355FFRadiating Hearts^000000";
+				mes "15x ^3355FFExplosive Hearts^000000";
+				mes "15x ^3355FFClosed Hearts^000000";
+				mes "15x ^3355FFBeefy Hearts^000000";
+				mes "15x ^3355FFBeating Hearts^000000";
+				mes "15x ^3355FFPlump Hearts^000000";
+				mes "15x ^3355FFTough Hearts^000000";
+				mes "15x ^3355FFEnchanted Hearts^000000";
+				mes "15x ^3355FFGhastly Hearts^000000";
+				next;
+				mes "[Poringa]";
+				mes "Have you collected all the hearts I've requested?";
+				mes "Mmm.. Mmh.. Nupp!";
+				mes "Doesn't seem like you have enough. Come back to me when you've got all those succulent hears for my *ahem* research!";
+				close;
+			}
+		}
+		if(QVAL==2){
+			mes "[Poringa]";
+			mes "Do you mind finding the ever-elusive Sprouting so we can unite our..";
+			close;
+		}
+		if(QVAL==3){
+			mes "[Poringa]";
+			mes "What's this?";
+			mes "Oh.";
+			mes "So about that.";
+			mes "I may have already found my one true blobb, he's this really majestic number from Ginnunggap, even has wings so he gets to fly me around when he isn't slaughtering trespassers!";
+			mes "Do you mind break the news to Sprouting?";
+			mes "Blub-blob";
+			set QVAL,4;
+			delitem @b10,1; //Sprouting Love Letter
+			close;
+		}
+		if(QVAL==4){
+			mes "Do you mind breaking the news to Sprouting?";
+			mes "Blub-blob";
+			close;
+		close;		
+		}
+		if(QVAL==5){
+			mes "[Poringa]";
+			mes "You two make an adorable couple! Blup-blup!";
+			close;
+		}
+		//Introduction talk with npc
+		
+		mes "[Poringa]";
+		mes "Blrrb.. Valentine's Day can be such a bore without someone to share a Jellopy with,"; 
+		mes "long do I miss the days bouncing across the rivera and devouring loot from weary travellers with a significant other!";
+		next;
+		mes "[Poringa]";
+		mes "Oh! Can you cuties help me find my blub in shining goo?"; 
+		mes "I'll need you to go on an expedition and retrieve me the hearts of potential bachelors! As morbid as it sounds,";
+		mes "I do need to analyse my compatibility with them quite thoroughly";
+		next;
+		set QVAL,1;
+		mes "[Poringa]";
+		mes "I'll need"; 
+		mes "15x ^3355FFRadiating Hearts^000000";
+		mes "15x ^3355FFExplosive Hearts^000000";
+		mes "15x ^3355FFClosed Hearts^000000";
+		mes "15x ^3355FFBeefy Hearts^000000";
+		mes "15x ^3355FFBeating Hearts^000000";
+		mes "15x ^3355FFPlump Hearts^000000";
+		mes "15x ^3355FFTough Hearts^000000";
+		mes "15x ^3355FFEnchanted Hearts^000000";
+		mes "and finally";
+		mes "15x ^3355FFGhastly Hearts^000000";
+		mes "Eeep!";
+		mes "I think that should be it!";
+		close;		
+}
+
+//Sprouting NPC
+gef_fild07,183,246,4	script	Sprouting	@a10,{
+	if(QVAL==0 || QVAL==1){
+		mes "[Sprouting]";
+		mes "Bloop...";
+		close;
+	}
+	if(QVAL==2){
+		mes "[Sprouting]";
+		mes "I came to you one rainless, night."; 
+		mes "You taught me how to live without the rain.";
+		mes "You are thirst and thirst is all I know. ";
+		mes "You are sand, wind, sun and blob... W-wait, who are you?! A Poringa seeks my attention? And blobb?";
+		next;
+		mes "[Sprouting]";
+		mes "Ah-hah.. Well.";
+		mes "I'm assuming my tender voice echoed through the skies and into her gooey heart.";
+		mes "Either that, or she wants to me for supper.";
+		mes "You see..";
+		mes "With a Poringa, you have a 50/50 chance of everlasting happiness, or being next on her menu.";
+		mes "Hmm.. Nevertheless, I'll take the risk!";
+		next;
+		mes "[Sprouting]";
+		mes "Hand her this love letter, and I will initiate the courting process immediately!";
+		mes "Thank you travellers; here's to not being eaten!";
+		set QVAL,3;
+		getitem @b10,1; //Sprouting Love Letter
+		close;	
+	}
+	if(QVAL==3){
+		mes "[Sprouting]";
+		mes "Blob.. Blob. Did she receive the letter yet?";
+		close;
+	}
+	if(QVAL==4){
+		mes "[Sprouting]";
+		mes "So she claims to have found another?";
+		mes "Alas..";
+		mes "My search continues.";
+		mes "But it is getting rather cold up here..";
+		mes "Say, you wouldn’t happen to have extra space in your inventory to carry me along on your adventures?";
+		mes "I don't think my poor heart can take much more of this solitude.";
+		mes "I've even made you this costume so we can match!";
+		mes "Bloop?";
+		set QVAL,5;
+		getitem @b11,1; //Sprouting Egg
+		getitem @b12,1; //Sprouting Hat Costume
+		close;
+	}
+	if(QVAL==5){
+		mes "[Sprouting]";
+		mes "Bloop bloop...";
+		close;
+	}
+}
+
+//===== MOB City Spawns ============================
+//prontera
+prontera,0,0	monster	Teddyring	@a1,1,900000,0,0
+prontera,0,0	monster	Bombering	@a2,1,900000,0,0
+prontera,0,0	monster	Icering	@a3,1,900000,0,0
+prontera,0,0	monster	Cowring	@a4,1,900000,0,0
+prontera,0,0	monster	Nekoring	@a5,1,900000,0,0
+prontera,0,0	monster	Pandaring	@a6,1,900000,0,0
+prontera,0,0	monster	Orcring	@a7,1,900000,0,0
+prontera,0,0	monster	Pixyring	@a8,1,900000,0,0
+prontera,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//payon
+payon,0,0	monster	Teddyring	@a1,1,900000,0,0
+payon,0,0	monster	Bombering	@a2,1,900000,0,0
+payon,0,0	monster	Icering	@a3,1,900000,0,0
+payon,0,0	monster	Cowring	@a4,1,900000,0,0
+payon,0,0	monster	Nekoring	@a5,1,900000,0,0
+payon,0,0	monster	Pandaring	@a6,1,900000,0,0
+payon,0,0	monster	Orcring	@a7,1,900000,0,0
+payon,0,0	monster	Pixyring	@a8,1,900000,0,0
+payon,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Alberta
+alberta,0,0	monster	Teddyring	@a1,1,900000,0,0
+alberta,0,0	monster	Bombering	@a2,1,900000,0,0
+alberta,0,0	monster	Icering	@a3,1,900000,0,0
+alberta,0,0	monster	Cowring	@a4,1,900000,0,0
+alberta,0,0	monster	Nekoring	@a5,1,900000,0,0
+alberta,0,0	monster	Pandaring	@a6,1,900000,0,0
+alberta,0,0	monster	Orcring	@a7,1,900000,0,0
+alberta,0,0	monster	Pixyring	@a8,1,900000,0,0
+alberta,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Aldebaran
+aldebaran,0,0	monster	Teddyring	@a1,1,900000,0,0
+aldebaran,0,0	monster	Bombering	@a2,1,900000,0,0
+aldebaran,0,0	monster	Icering	@a3,1,900000,0,0
+aldebaran,0,0	monster	Cowring	@a4,1,900000,0,0
+aldebaran,0,0	monster	Nekoring	@a5,1,900000,0,0
+aldebaran,0,0	monster	Pandaring	@a6,1,900000,0,0
+aldebaran,0,0	monster	Orcring	@a7,1,900000,0,0
+aldebaran,0,0	monster	Pixyring	@a8,1,900000,0,0
+aldebaran,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//amatsu
+amatsu,0,0	monster	Teddyring	@a1,1,900000,0,0
+amatsu,0,0	monster	Bombering	@a2,1,900000,0,0
+amatsu,0,0	monster	Icering	@a3,1,900000,0,0
+amatsu,0,0	monster	Cowring	@a4,1,900000,0,0
+amatsu,0,0	monster	Nekoring	@a5,1,900000,0,0
+amatsu,0,0	monster	Pandaring	@a6,1,900000,0,0
+amatsu,0,0	monster	Orcring	@a7,1,900000,0,0
+amatsu,0,0	monster	Pixyring	@a8,1,900000,0,0
+amatsu,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//ayothaya
+ayothaya,0,0	monster	Teddyring	@a1,1,900000,0,0
+ayothaya,0,0	monster	Bombering	@a2,1,900000,0,0
+ayothaya,0,0	monster	Icering	@a3,1,900000,0,0
+ayothaya,0,0	monster	Cowring	@a4,1,900000,0,0
+ayothaya,0,0	monster	Nekoring	@a5,1,900000,0,0
+ayothaya,0,0	monster	Pandaring	@a6,1,900000,0,0
+ayothaya,0,0	monster	Orcring	@a7,1,900000,0,0
+ayothaya,0,0	monster	Pixyring	@a8,1,900000,0,0
+ayothaya,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Becon Island
+cmd_fild07,0,0	monster	Teddyring	@a1,1,900000,0,0
+cmd_fild07,0,0	monster	Bombering	@a2,1,900000,0,0
+cmd_fild07,0,0	monster	Icering	@a3,1,900000,0,0
+cmd_fild07,0,0	monster	Cowring	@a4,1,900000,0,0
+cmd_fild07,0,0	monster	Nekoring	@a5,1,900000,0,0
+cmd_fild07,0,0	monster	Pandaring	@a6,1,900000,0,0
+cmd_fild07,0,0	monster	Orcring	@a7,1,900000,0,0
+cmd_fild07,0,0	monster	Pixyring	@a8,1,900000,0,0
+cmd_fild07,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//brasilis
+brasilis,0,0	monster	Teddyring	@a1,1,900000,0,0
+brasilis,0,0	monster	Bombering	@a2,1,900000,0,0
+brasilis,0,0	monster	Icering	@a3,1,900000,0,0
+brasilis,0,0	monster	Cowring	@a4,1,900000,0,0
+brasilis,0,0	monster	Nekoring	@a5,1,900000,0,0
+brasilis,0,0	monster	Pandaring	@a6,1,900000,0,0
+brasilis,0,0	monster	Orcring	@a7,1,900000,0,0
+brasilis,0,0	monster	Pixyring	@a8,1,900000,0,0
+brasilis,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//comodo
+comodo,0,0	monster	Teddyring	@a1,1,900000,0,0
+comodo,0,0	monster	Bombering	@a2,1,900000,0,0
+comodo,0,0	monster	Icering	@a3,1,900000,0,0
+comodo,0,0	monster	Cowring	@a4,1,900000,0,0
+comodo,0,0	monster	Nekoring	@a5,1,900000,0,0
+comodo,0,0	monster	Pandaring	@a6,1,900000,0,0
+comodo,0,0	monster	Orcring	@a7,1,900000,0,0
+comodo,0,0	monster	Pixyring	@a8,1,900000,0,0
+comodo,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//dewata
+dewata,0,0	monster	Teddyring	@a1,1,900000,0,0
+dewata,0,0	monster	Bombering	@a2,1,900000,0,0
+dewata,0,0	monster	Icering	@a3,1,900000,0,0
+dewata,0,0	monster	Cowring	@a4,1,900000,0,0
+dewata,0,0	monster	Nekoring	@a5,1,900000,0,0
+dewata,0,0	monster	Pandaring	@a6,1,900000,0,0
+dewata,0,0	monster	Orcring	@a7,1,900000,0,0
+dewata,0,0	monster	Pixyring	@a8,1,900000,0,0
+dewata,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//einbroch
+einbroch,0,0	monster	Teddyring	@a1,1,900000,0,0
+einbroch,0,0	monster	Bombering	@a2,1,900000,0,0
+einbroch,0,0	monster	Icering	@a3,1,900000,0,0
+einbroch,0,0	monster	Cowring	@a4,1,900000,0,0
+einbroch,0,0	monster	Nekoring	@a5,1,900000,0,0
+einbroch,0,0	monster	Pandaring	@a6,1,900000,0,0
+einbroch,0,0	monster	Orcring	@a7,1,900000,0,0
+einbroch,0,0	monster	Pixyring	@a8,1,900000,0,0
+einbroch,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//El Dicastes
+dicastes01,0,0	monster	Teddyring	@a1,1,900000,0,0
+dicastes01,0,0	monster	Bombering	@a2,1,900000,0,0
+dicastes01,0,0	monster	Icering	@a3,1,900000,0,0
+dicastes01,0,0	monster	Cowring	@a4,1,900000,0,0
+dicastes01,0,0	monster	Nekoring	@a5,1,900000,0,0
+dicastes01,0,0	monster	Pandaring	@a6,1,900000,0,0
+dicastes01,0,0	monster	Orcring	@a7,1,900000,0,0
+dicastes01,0,0	monster	Pixyring	@a8,1,900000,0,0
+dicastes01,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//geffen
+geffen,0,0	monster	Teddyring	@a1,1,900000,0,0
+geffen,0,0	monster	Bombering	@a2,1,900000,0,0
+geffen,0,0	monster	Icering	@a3,1,900000,0,0
+geffen,0,0	monster	Cowring	@a4,1,900000,0,0
+geffen,0,0	monster	Nekoring	@a5,1,900000,0,0
+geffen,0,0	monster	Pandaring	@a6,1,900000,0,0
+geffen,0,0	monster	Orcring	@a7,1,900000,0,0
+geffen,0,0	monster	Pixyring	@a8,1,900000,0,0
+geffen,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//gonryun
+gonryun,0,0	monster	Teddyring	@a1,1,900000,0,0
+gonryun,0,0	monster	Bombering	@a2,1,900000,0,0
+gonryun,0,0	monster	Icering	@a3,1,900000,0,0
+gonryun,0,0	monster	Cowring	@a4,1,900000,0,0
+gonryun,0,0	monster	Nekoring	@a5,1,900000,0,0
+gonryun,0,0	monster	Pandaring	@a6,1,900000,0,0
+gonryun,0,0	monster	Orcring	@a7,1,900000,0,0
+gonryun,0,0	monster	Pixyring	@a8,1,900000,0,0
+gonryun,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//hugal
+hugal,0,0	monster	Teddyring	@a1,1,900000,0,0
+hugal,0,0	monster	Bombering	@a2,1,900000,0,0
+hugal,0,0	monster	Icering	@a3,1,900000,0,0
+hugal,0,0	monster	Cowring	@a4,1,900000,0,0
+hugal,0,0	monster	Nekoring	@a5,1,900000,0,0
+hugal,0,0	monster	Pandaring	@a6,1,900000,0,0
+hugal,0,0	monster	Orcring	@a7,1,900000,0,0
+hugal,0,0	monster	Pixyring	@a8,1,900000,0,0
+hugal,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//izlude
+izlude,0,0	monster	Teddyring	@a1,1,900000,0,0
+izlude,0,0	monster	Bombering	@a2,1,900000,0,0
+izlude,0,0	monster	Icering	@a3,1,900000,0,0
+izlude,0,0	monster	Cowring	@a4,1,900000,0,0
+izlude,0,0	monster	Nekoring	@a5,1,900000,0,0
+izlude,0,0	monster	Pandaring	@a6,1,900000,0,0
+izlude,0,0	monster	Orcring	@a7,1,900000,0,0
+izlude,0,0	monster	Pixyring	@a8,1,900000,0,0
+izlude,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//jawaii
+jawaii,0,0	monster	Teddyring	@a1,1,900000,0,0
+jawaii,0,0	monster	Bombering	@a2,1,900000,0,0
+jawaii,0,0	monster	Icering	@a3,1,900000,0,0
+jawaii,0,0	monster	Cowring	@a4,1,900000,0,0
+jawaii,0,0	monster	Nekoring	@a5,1,900000,0,0
+jawaii,0,0	monster	Pandaring	@a6,1,900000,0,0
+jawaii,0,0	monster	Orcring	@a7,1,900000,0,0
+jawaii,0,0	monster	Pixyring	@a8,1,900000,0,0
+jawaii,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//lighthalzen
+lighthalzen,0,0	monster	Teddyring	@a1,1,900000,0,0
+lighthalzen,0,0	monster	Bombering	@a2,1,900000,0,0
+lighthalzen,0,0	monster	Icering	@a3,1,900000,0,0
+lighthalzen,0,0	monster	Cowring	@a4,1,900000,0,0
+lighthalzen,0,0	monster	Nekoring	@a5,1,900000,0,0
+lighthalzen,0,0	monster	Pandaring	@a6,1,900000,0,0
+lighthalzen,0,0	monster	Orcring	@a7,1,900000,0,0
+lighthalzen,0,0	monster	Pixyring	@a8,1,900000,0,0
+lighthalzen,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//louyang
+louyang,0,0	monster	Teddyring	@a1,1,900000,0,0
+louyang,0,0	monster	Bombering	@a2,1,900000,0,0
+louyang,0,0	monster	Icering	@a3,1,900000,0,0
+louyang,0,0	monster	Cowring	@a4,1,900000,0,0
+louyang,0,0	monster	Nekoring	@a5,1,900000,0,0
+louyang,0,0	monster	Pandaring	@a6,1,900000,0,0
+louyang,0,0	monster	Orcring	@a7,1,900000,0,0
+louyang,0,0	monster	Pixyring	@a8,1,900000,0,0
+louyang,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Lutie
+xmas,0,0	monster	Teddyring	@a1,1,900000,0,0
+xmas,0,0	monster	Bombering	@a2,1,900000,0,0
+xmas,0,0	monster	Icering	@a3,1,900000,0,0
+xmas,0,0	monster	Cowring	@a4,1,900000,0,0
+xmas,0,0	monster	Nekoring	@a5,1,900000,0,0
+xmas,0,0	monster	Pandaring	@a6,1,900000,0,0
+xmas,0,0	monster	Orcring	@a7,1,900000,0,0
+xmas,0,0	monster	Pixyring	@a8,1,900000,0,0
+xmas,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//malangdo
+malangdo,0,0	monster	Teddyring	@a1,1,900000,0,0
+malangdo,0,0	monster	Bombering	@a2,1,900000,0,0
+malangdo,0,0	monster	Icering	@a3,1,900000,0,0
+malangdo,0,0	monster	Cowring	@a4,1,900000,0,0
+malangdo,0,0	monster	Nekoring	@a5,1,900000,0,0
+malangdo,0,0	monster	Pandaring	@a6,1,900000,0,0
+malangdo,0,0	monster	Orcring	@a7,1,900000,0,0
+malangdo,0,0	monster	Pixyring	@a8,1,900000,0,0
+malangdo,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//manuk
+manuk,0,0	monster	Teddyring	@a1,1,900000,0,0
+manuk,0,0	monster	Bombering	@a2,1,900000,0,0
+manuk,0,0	monster	Icering	@a3,1,900000,0,0
+manuk,0,0	monster	Cowring	@a4,1,900000,0,0
+manuk,0,0	monster	Nekoring	@a5,1,900000,0,0
+manuk,0,0	monster	Pandaring	@a6,1,900000,0,0
+manuk,0,0	monster	Orcring	@a7,1,900000,0,0
+manuk,0,0	monster	Pixyring	@a8,1,900000,0,0
+manuk,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Midgard Camp
+mid_camp,0,0	monster	Teddyring	@a1,1,900000,0,0
+mid_camp,0,0	monster	Bombering	@a2,1,900000,0,0
+mid_camp,0,0	monster	Icering	@a3,1,900000,0,0
+mid_camp,0,0	monster	Cowring	@a4,1,900000,0,0
+mid_camp,0,0	monster	Nekoring	@a5,1,900000,0,0
+mid_camp,0,0	monster	Pandaring	@a6,1,900000,0,0
+mid_camp,0,0	monster	Orcring	@a7,1,900000,0,0
+mid_camp,0,0	monster	Pixyring	@a8,1,900000,0,0
+mid_camp,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//mora
+mora,0,0	monster	Teddyring	@a1,1,900000,0,0
+mora,0,0	monster	Bombering	@a2,1,900000,0,0
+mora,0,0	monster	Icering	@a3,1,900000,0,0
+mora,0,0	monster	Cowring	@a4,1,900000,0,0
+mora,0,0	monster	Nekoring	@a5,1,900000,0,0
+mora,0,0	monster	Pandaring	@a6,1,900000,0,0
+mora,0,0	monster	Orcring	@a7,1,900000,0,0
+mora,0,0	monster	Pixyring	@a8,1,900000,0,0
+mora,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//morroc
+morroc,0,0	monster	Teddyring	@a1,1,900000,0,0
+morroc,0,0	monster	Bombering	@a2,1,900000,0,0
+morroc,0,0	monster	Icering	@a3,1,900000,0,0
+morroc,0,0	monster	Cowring	@a4,1,900000,0,0
+morroc,0,0	monster	Nekoring	@a5,1,900000,0,0
+morroc,0,0	monster	Pandaring	@a6,1,900000,0,0
+morroc,0,0	monster	Orcring	@a7,1,900000,0,0
+morroc,0,0	monster	Pixyring	@a8,1,900000,0,0
+morroc,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//moscovia
+moscovia,0,0	monster	Teddyring	@a1,1,900000,0,0
+moscovia,0,0	monster	Bombering	@a2,1,900000,0,0
+moscovia,0,0	monster	Icering	@a3,1,900000,0,0
+moscovia,0,0	monster	Cowring	@a4,1,900000,0,0
+moscovia,0,0	monster	Nekoring	@a5,1,900000,0,0
+moscovia,0,0	monster	Pandaring	@a6,1,900000,0,0
+moscovia,0,0	monster	Orcring	@a7,1,900000,0,0
+moscovia,0,0	monster	Pixyring	@a8,1,900000,0,0
+moscovia,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//niflheim
+niflheim,0,0	monster	Teddyring	@a1,1,900000,0,0
+niflheim,0,0	monster	Bombering	@a2,1,900000,0,0
+niflheim,0,0	monster	Icering	@a3,1,900000,0,0
+niflheim,0,0	monster	Cowring	@a4,1,900000,0,0
+niflheim,0,0	monster	Nekoring	@a5,1,900000,0,0
+niflheim,0,0	monster	Pandaring	@a6,1,900000,0,0
+niflheim,0,0	monster	Orcring	@a7,1,900000,0,0
+niflheim,0,0	monster	Pixyring	@a8,1,900000,0,0
+niflheim,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//Port malaya
+malaya,0,0	monster	Teddyring	@a1,1,900000,0,0
+malaya,0,0	monster	Bombering	@a2,1,900000,0,0
+malaya,0,0	monster	Icering	@a3,1,900000,0,0
+malaya,0,0	monster	Cowring	@a4,1,900000,0,0
+malaya,0,0	monster	Nekoring	@a5,1,900000,0,0
+malaya,0,0	monster	Pandaring	@a6,1,900000,0,0
+malaya,0,0	monster	Orcring	@a7,1,900000,0,0
+malaya,0,0	monster	Pixyring	@a8,1,900000,0,0
+malaya,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//rachel
+rachel,0,0	monster	Teddyring	@a1,1,900000,0,0
+rachel,0,0	monster	Bombering	@a2,1,900000,0,0
+rachel,0,0	monster	Icering	@a3,1,900000,0,0
+rachel,0,0	monster	Cowring	@a4,1,900000,0,0
+rachel,0,0	monster	Nekoring	@a5,1,900000,0,0
+rachel,0,0	monster	Pandaring	@a6,1,900000,0,0
+rachel,0,0	monster	Orcring	@a7,1,900000,0,0
+rachel,0,0	monster	Pixyring	@a8,1,900000,0,0
+rachel,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//splendide
+splendide,0,0	monster	Teddyring	@a1,1,900000,0,0
+splendide,0,0	monster	Bombering	@a2,1,900000,0,0
+splendide,0,0	monster	Icering	@a3,1,900000,0,0
+splendide,0,0	monster	Cowring	@a4,1,900000,0,0
+splendide,0,0	monster	Nekoring	@a5,1,900000,0,0
+splendide,0,0	monster	Pandaring	@a6,1,900000,0,0
+splendide,0,0	monster	Orcring	@a7,1,900000,0,0
+splendide,0,0	monster	Pixyring	@a8,1,900000,0,0
+splendide,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//umbala
+umbala,0,0	monster	Bombering	@a2,1,900000,0,0
+umbala,0,0	monster	Icering	@a3,1,900000,0,0
+umbala,0,0	monster	Cowring	@a4,1,900000,0,0
+umbala,0,0	monster	Nekoring	@a5,1,900000,0,0
+umbala,0,0	monster	Pandaring	@a6,1,900000,0,0
+umbala,0,0	monster	Orcring	@a7,1,900000,0,0
+umbala,0,0	monster	Pixyring	@a8,1,900000,0,0
+umbala,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//veins
+veins,0,0	monster	Teddyring	@a1,1,900000,0,0
+veins,0,0	monster	Bombering	@a2,1,900000,0,0
+veins,0,0	monster	Icering	@a3,1,900000,0,0
+veins,0,0	monster	Cowring	@a4,1,900000,0,0
+veins,0,0	monster	Nekoring	@a5,1,900000,0,0
+veins,0,0	monster	Pandaring	@a6,1,900000,0,0
+veins,0,0	monster	Orcring	@a7,1,900000,0,0
+veins,0,0	monster	Pixyring	@a8,1,900000,0,0
+veins,0,0	monster	Whispering	@a9,1,900000,0,0
+
+//yuno
+yuno,0,0	monster	Teddyring	@a1,1,900000,0,0
+yuno,0,0	monster	Bombering	@a2,1,900000,0,0
+yuno,0,0	monster	Icering	@a3,1,900000,0,0
+yuno,0,0	monster	Cowring	@a4,1,900000,0,0
+yuno,0,0	monster	Nekoring	@a5,1,900000,0,0
+yuno,0,0	monster	Pandaring	@a6,1,900000,0,0
+yuno,0,0	monster	Orcring	@a7,1,900000,0,0
+yuno,0,0	monster	Pixyring	@a8,1,900000,0,0
+yuno,0,0	monster	Whispering	@a9,1,900000,0,0
