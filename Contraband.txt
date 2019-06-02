@@ -1,0 +1,511 @@
+// ====================================================================================================
+// Contraband - map: a clone of ??
+// ====================================================================================================
+// Warp NPC
+izlude,134,145,4	script	Volaren#contraband	1019,{
+	if(.phase) {
+		mes "The game is in progress.";
+		next;
+	}
+	
+	mes "Volaren";
+	mes "How may I help you?";
+	next;
+	
+	switch(select("How to play?:Return to save point")) {
+	
+	case 1:
+	mes "Volaren";
+	mes "Two players will start off with two coin vaults each, a local vault with coins and an empty offshore vault.";
+	next;
+	
+	mes "Volaren";
+	mes "They take turns to roleplay a smuggler and an inspector respectively, with the mission to moving their coins from their local vaults to their offshore vault.";
+	next;
+	
+	mes "Volaren";
+	mes "The smuggler shall try to smuggle as much coins as possible while the inspector shall try to prevent it.";
+	next;
+	
+	mes "Volaren";
+	mes "During each turn, the inspector can either:";
+	mes	"1. Calls a doubt, followed by the amount.";
+	mes "2. Let the smuggler pass.";
+	next;
+	
+	mes "Volaren";
+	mes "If a doubt is called and the smuggler is not carrying any coin, the inspector pays the smuggler an indemnity equal to half of the amount they called doubt.";
+	next;
+	
+	mes "Volaren";
+	mes "If the doubted amount equals to or exceeds the amount of coins carried by the smuggler, the inspector will take the coins.";
+	next;
+	
+	mes "Volaren";
+	mes "If the doubted amount is lesser than the amount of coins carried by the smuggler, the smuggler walks away with the coins plus an indemnity amount from the inspector.";
+	next;
+	
+	mes "Volaren";
+	mes "The game ends when either:";
+	mes "1. A total of 30 rounds have ended.";
+	mes "2. One player has no more coins in his/her local vault.";
+	next;
+	
+	mes "Volaren";
+	mes "When the game ends, any coin left in each player's local vault will go to their opponent's offshore vault.";
+	close;
+	
+	case 2:
+	atcommand "@return";
+	}
+	
+OnInit:
+	waitingroom "Contraband - Waiting Room",20,"Volaren#contraband::OnStart",2;
+	end;
+	
+OnStart:
+	disablewaitingroomevent;
+	set .phase,1;
+	getmapxy(.@map$,.@x,.@y,BL_NPC,"Tam Tam#contraband");
+	warpwaitingpc "izlude",134,124,2;
+	end;
+	
+OnEnd:
+	sleep(5000);
+	enablewaitingroomevent;
+	set .phase,0;
+	end;
+}
+
+// Game NPC
+izlude,134,125,4	script	Tam Tam#contraband	1019,{
+	// .phase
+	// 0 = not started, waiting room
+	// 1 = started, introductory phase
+	// 2 = started, decision phase
+	// 3 = started, score tallying phase
+	
+	if(.phase == 2) {
+		if(getcharid(0) == .smuggler) {
+			mes "[" + strnpcinfo(1) + "]";
+			mes "Hi " + strcharinfo(0) + ", here are your details.";
+			
+			if(.smuggler == .player1) {
+				mes "Balance: ^0000FF" + .balance1 + "^000000";
+				mes "Smuggled: ^0000FF" + .account1 + "^000000";
+			}
+			else if(.smuggler == .player2) {
+				mes "Balance: ^0000FF" + .balance2 + "^000000";
+				mes "Smuggled: ^0000FF" + .account2 + "^000000";
+			}
+			
+			if(.coin > 0) {
+				mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
+			}
+			
+			mes "What would you like to do?";
+			next;
+			
+			switch(select("Pass:Smuggle")) {
+			case 1:
+			set .coin,0;
+			mes "[" + strnpcinfo(1) + "]";
+			mes "You chose not to smuggle anything this round.";
+			close;
+			
+			case 2:
+			mes "[" + strnpcinfo(1) + "]";
+			mes "How much are you smuggling?";
+			next;
+			
+			input .coin;
+			
+			if(.coin < 1 || .coin > 100) {
+				mes "[" + strnpcinfo(1) + "]";
+				mes "Sorry, you can choose a number between 1 and 100 inclusive.";
+				close;
+			}
+			
+			if(.coin > .balance1) {
+				mes "[" + strnpcinfo(1) + "]";
+				mes "Sorry, you can only smuggle up to " + .balance1 + " coins.";
+				close;
+			}
+			
+			mes "[" + strnpcinfo(1) + "]";
+			mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
+			close;
+		}
+	}
+		
+		if(getcharid(0) == .inspector) {
+			if(getcharid(0) == .inspector) {
+			mes "[" + strnpcinfo(1) + "]";
+			mes "Hi " + strcharinfo(0) + ", here are your details.";
+			
+			if(.inspector == .player1) {
+				mes "Balance: ^0000FF" + .balance1 + "^000000";
+				mes "Intercepted: ^0000FF" + .account1 + "^000000";
+			}
+			else if(.inspector == .player2) {
+				mes "Balance: ^0000FF" + .balance2 + "^000000";
+				mes "Intercepted: ^0000FF" + .account2 + "^000000";
+			}
+			
+			if(.coin > 0) {
+				mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
+			}
+			
+			if(.doubt > 0) {
+				mes "Your doubt: ^0000FF" + .doubt + "^000000";
+			}
+			
+			mes "What would you like to do?";
+			next;
+			
+			switch(select("Pass:Doubt")) {
+			case 1:
+			set .doubt,0;
+			mes "[" + strnpcinfo(1) + "]";
+			mes "You are letting the smuggler pass this round.";
+			close;
+			
+			case 2:
+			mes "[" + strnpcinfo(1) + "]";
+			mes "How much are you doubting?";
+			next;
+			
+			input .doubt;
+			
+			if(.doubt < 1 || .doubt > 100) {
+				mes "[" + strnpcinfo(1) + "]";
+				mes "Sorry, you can choose a number between 1 and 100 inclusive.";
+				close;
+			}
+			
+			mes "[" + strnpcinfo(1) + "]";
+			mes "Your doubt: ^0000FF" + .doubt + "^000000";
+			close;
+		}
+		}
+		}
+	}
+	
+OnTouch:
+	if(!.phase) {
+		// Register player info into NPC
+		if(!.player1) {
+			set .player1,getcharid(0);
+			//set .ipadd1,getcharip(0);
+			set .balance1,1000;
+			set .account1,0;
+		}
+		else {
+			if(getcharid(0) == .player1) end;
+			
+			set .player2,getcharid(0);
+			//set .ipadd2,getcharip(0);
+			set .balance2,1000;
+			set .account2,0;
+			
+			/* if(.ipadd1 == ipadd2) {
+				dispbottom "Same IP address detected, you are kicked from the minigame.",,.player1;
+				dispbottom "Same IP address detected, you are kicked from the minigame.",,.player2;
+				areawarp strnpcinfo(4),x1,y1,x2,y2,"Comodo",x3,y3; //need map
+				
+				donpcevent "Tam Tam#contraband::OnEnd";
+				end;
+			} */
+			
+			// Roll a dice to select whom to start first
+			if(rand(2)) {
+				set .smuggler,.player1;
+				set .inspector,.player2;
+			}
+			else {
+				set .smuggler,.player2;
+				set .inspector,.player1;
+			}
+			
+			set .phase,1;
+			donpcevent "Tam Tam#contraband::OnWelcome";
+		}
+	}
+	
+	end;
+	
+OnWelcome:
+	sleep(3000);
+	
+	announce "Welcome to Contraband!",bc_all;
+	sleep(4000);
+	
+	announce "The game will begin with " + strcharinfo(0,.smuggler) + " as the smuggler and " + strcharinfo(0,.inspector) + " as the custom inspector.",bc_all;
+	sleep(4000);
+	
+	announce "Round 1 has started.",bc_all;
+	
+	set .phase,2;
+	initnpctimer;
+	
+	set .round,1; // Variable to scale reward value in case of a player disconnects or abandons.
+	
+	end;
+	
+OnTimer20000:
+	if(.phase == 2) {
+		stopnpctimer;
+		
+		// Check abandon status
+		if(strcharinfo(3,.player1) != strnpcinfo(4) || strcharinfo(3,.player2) != strnpcinfo(4)) {
+			if(strcharinfo(3,.player1) == strnpcinfo(4)) set .reward,1;
+			if(strcharinfo(3,.player2) == strnpcinfo(4)) set .reward,2;
+			donpcevent "Tam Tam#contraband::OnReward";
+		}
+		
+		// Determine result
+		// 1 = No win or loss
+		// 2 = Smuggle success
+		// 3 = Inspector pays indemnity
+		// 4 = Smuggle failure
+		// 5 = Smuggle success, inspector pays indemnity
+		
+		if(!.doubt && !.coin) {
+			set .result,1;
+		}
+		else if(!.doubt && .coin > 0) {
+			set .result,2;
+		}
+		else if(.doubt > 0 && !.coin) {
+			set .result,3;
+		}
+		else if(.doubt > 0 && .coin > 0 && .doubt >= .coin) {
+			set .result,4;
+		}
+		else if(.doubt > 0 && .coin > 0 && .doubt < .coin) {
+			set .result,5;
+		}
+		
+		donpcevent "Tam Tam#contraband::OnResult";
+	}
+	
+	end;
+	
+OnResult:
+	
+	announce "Round " + .round + " has ended.",bc_all;
+	
+	sleep(4000);
+	
+	set .round,.round + 1;
+	
+	if(.result == 1) {
+		announce "The inspector has decided to let the smuggler pass.",bc_all;
+		sleep(4000);
+		
+		announce "However, the smuggler isn't carrying any coins.",bc_all;
+		sleep(4000);
+	}
+	else if(.result == 2) {
+		if(.smuggler == .player1) {
+			set .balance1,.balance1 - .coin;
+			set .account1,.account1 + .coin;
+		}
+		else{
+			set .balance2,.balance2 - .coin;
+			set .account2,.account2 + .coin;
+		}
+		
+		announce "The inspector has decided to let the smuggler pass.",bc_all;
+		sleep(4000);
+		
+		announce "The smuggler is bringing " + .coin + " coins along without restriction.",bc_all;
+		sleep(4000);
+		
+		set .coin,0;
+	}
+	else if(.result == 3) {
+		set .@temp,.doubt / 2;
+		
+		if(.smuggler == .player1) {
+			if(.@temp > .balance2) set .@temp,.balance2;
+			
+			set .account1,.account1 + .@temp;
+			set .balance2,.balance2 - .@temp;
+		}
+		else{
+			if(.@temp > .balance1) set .@temp,.balance1;
+			
+			set .account2,.account2 + .@temp;
+			set .balance1,.balance1 - .@temp;
+		}
+		
+		announce "The inspector calls a doubt of " + .doubt + ".",bc_all;
+		sleep(4000);
+		
+		announce "However, the smuggler isn't carrying any coins.",bc_all;
+		sleep(4000);
+		
+		announce "The inspector pays half the doubted amount to the smuggler as indemnity.",bc_all;
+		sleep(4000);
+		
+		set .doubt,0;
+	}
+	else if(.result == 4) {
+		if(.smuggler == .player1) {
+			set .account2,.account2 + .coin;
+			set .balance1,.balance1 - .coin;
+		}
+		else{
+			set .account1,.account1 + .coin;
+			set .balance2,.balance2 - .coin;
+		}
+		
+		announce "The inspector calls a doubt of " + .doubt + ".",bc_all;
+		sleep(4000);
+		
+		announce "The smuggler is bringing " + .coin + " coins.",bc_all;
+		sleep(4000);
+		
+		announce "The inspector receives all the coins from the smuggler.",bc_all;
+		sleep(4000);
+		
+		set .doubt,0;
+		set .coin,0;
+	}
+	else if(.result == 5) {
+		set .@temp,.doubt / 2;
+		
+		if(.smuggler == .player1) {
+			set .account1,.account1 + .coin + .@temp;
+			set .balance1,.balance1 - .coin;
+			set .balance2,.balance2 - .@temp;
+		}
+		else{
+			set .account2,.account2 + .coin + .@temp;
+			set .balance2,.balance2 - .coin;
+			set .balance1,.balance1 - .@temp;
+		}
+		
+		announce "The inspector calls a doubt of " + .doubt + ".",bc_all;
+		sleep(4000);
+		
+		announce "The smuggler is bringing " + .coin + " coins.",bc_all;
+		sleep(4000);
+		
+		announce "The inspector pays half the doubted amount to the smuggler as indemnity.",bc_all;
+		sleep(4000);
+		
+		set .doubt,0;
+		set .coin,0;
+		set .result,0;
+	}
+	
+	// Check end game status
+	if(.round == 30 || !.balance1 || !.balance2) {
+		if(.round == 30) {
+			set .account1,.account1 + .balance2;
+			set .account2,.account2 + .balance1;
+		}
+		
+		if(.account1 > .account2) set .reward,3;
+		else if(.account1 < .account2) set .reward,4;
+		else if(.account1 == .account2) set .reward,5;
+		
+		set .phase,3;
+		donpcevent "Tam Tam#contraband::OnReward";
+	}
+	else {
+		initnpctimer;
+	}
+	announce "Round " +.round + " has started",bc_all;
+	end;
+	
+OnReward:
+	// .reward
+	// 1 = Player 2 abandons, Player 1 receive proportionate reward amount
+	// 2 = Player 1 abandons, Player 2 receive proportionate reward amount
+	// 3 = Player 1 wins
+	// 4 = Player 2 wins
+	// 5 = Tie, both players receive half the reward amount each
+	
+	if(.reward == 1) {
+		set .@amount,.reward_amt * .round / 15;
+		
+		announce "" + strcharinfo(0,.player2) + " has abandoned the game.",bc_all;
+		
+		announce "" + strcharinfo(0,.player1) + " shall receive proportionate reward.",bc_all;
+		sleep(4000);
+		
+		getitem .reward_id,.reward_amt,.player1;
+	}
+	if(.reward == 2) {
+		set .@amount,.reward_amt * .round / 15;
+		
+		announce "" + strcharinfo(0,.player1) + " has abandoned the game.",bc_all;
+		
+		announce "" + strcharinfo(0,.player2) + " shall receive proportionate reward.",bc_all;
+		sleep(4000);
+		
+		getitem .reward_id,.@amount,.player2;
+	}
+	if(.reward == 3) {
+		announce "" + strcharinfo(0,.player1) + " has more coins than " + strcharinfo(0,.player2) + "",bc_all;
+		
+		announce "" + strcharinfo(0,.player2) + " has been defeated.",bc_all;
+		sleep(4000);
+		
+		getitem .reward_id,.reward_amt,.player1;
+	}
+	if(.reward == 4) {
+		announce "" + strcharinfo(0,.player2) + " has more coins than " + strcharinfo(0,.player1) + "",bc_all;
+		
+		announce "" + strcharinfo(0,.player1) + " has been defeated.",bc_all;
+		sleep(4000);
+		
+		getitem .reward_id,.reward_amt,.player2;
+	}
+	if(.reward == 5) {
+		announce "" + strcharinfo(0,.player1) + " has the same amount of coins as " + strcharinfo(0,.player2) + "",bc_all;
+		
+		announce "It's a tie. Both players shall receive equal reward.",bc_all;
+		sleep(4000);
+		
+		set .@amount,.reward_amt / 2;
+		getitem .reward_id,.@amount,.player1;
+		getitem .reward_id,.@amount,.player2;
+	}
+	
+	areawarp "izlude",10,10,120,120,"izlude",134,141; // Not done
+	
+	donpcevent "Tam Tam#contraband::OnEnd";
+	
+	end;
+	
+OnEnd:
+	set .smuggler, 0;
+	set .inspector, 0;
+	set .player1,0;
+	set .player2,0;
+	set .ipadd1,0;
+	set .ipadd2,0;
+	set .balance1,0;
+	set .balance2,0;
+	set .account1,0;
+	set .account2,0;
+	set .coin,0;
+	set .doubt,0;
+	set .result,0;
+	set .phase,0;
+	set .round,0;
+	set .reward,0;
+	
+	donpcevent "Volaren#contraband::OnEnd";
+	
+	end;
+	
+/* OnInit:
+	set .reward_id,??;
+	set .reward_amt,??;
+	end; */
+}
