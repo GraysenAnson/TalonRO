@@ -137,7 +137,6 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			close;
 		}
 	}
-		
 		if(getcharid(0) == .inspector) {
 			if(getcharid(0) == .inspector) {
 			mes "[" + strnpcinfo(1) + "]";
@@ -190,32 +189,41 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 		}
 		}
 	}
-	
-OnTouch:
-	if(!.phase) {
+
+	//Inital Start of the game. Each player needs to click on the npc and select "Join" to be assigned their IDs.
+	//Quit will end the game and cancel will let the user close the text box.
+	mes "Tam Tam";
+	mes "Welcome to Contraband!";
+	mes "Please select Join to start the game!";
+	mes "Or select Quit to leave the game and go back to town!";
+	next;
+	switch(select("Join:Quit:Cancel")) {
+		case 1:
 		// Register player info into NPC
+		.play1 = rand(2);
 		if(!.player1) {
 			set .player1,getcharid(0);
-			//set .ipadd1,getcharip(0);
 			set .balance1,1000;
 			set .account1,0;
+			mes "You are Player 1";
+			close;
 		}
 		else {
-			if(getcharid(0) == .player1) end;
+			//Verify players, don't want player 2 starting the minigame twice if they click to join again.
+			if(getcharid(0) == .player1){ 
+			mes "You already joined!";
+			end;
+			}
+			if(getcharid(0) == .player2){ 
+			mes "You already joined!";
+			end;
+			}
 			
 			set .player2,getcharid(0);
-			//set .ipadd2,getcharip(0);
 			set .balance2,1000;
 			set .account2,0;
+			mes "You are Player 2";
 			
-			/* if(.ipadd1 == ipadd2) {
-				dispbottom "Same IP address detected, you are kicked from the minigame.",,.player1;
-				dispbottom "Same IP address detected, you are kicked from the minigame.",,.player2;
-				areawarp strnpcinfo(4),x1,y1,x2,y2,"Comodo",x3,y3; //need map
-				
-				donpcevent "Tam Tam#contraband::OnEnd";
-				end;
-			} */
 			
 			// Roll a dice to select whom to start first
 			if(rand(2)) {
@@ -229,10 +237,16 @@ OnTouch:
 			
 			set .phase,1;
 			donpcevent "Tam Tam#contraband::OnWelcome";
+			close;
+			end;
 		}
+		case 2:
+		areawarp "izlude",10,10,120,120,"izlude",134,141; // Not done
+		donpcevent "Tam Tam#contraband::OnEnd";
+		close;
+		case 3:
+		close;
 	}
-	
-	end;
 	
 OnWelcome:
 	sleep(3000);
@@ -250,7 +264,7 @@ OnWelcome:
 	
 	set .round,1; // Variable to scale reward value in case of a player disconnects or abandons.
 	
-	end;
+	end;	
 	
 OnTimer20000:
 	if(.phase == 2) {
@@ -503,9 +517,4 @@ OnEnd:
 	donpcevent "Volaren#contraband::OnEnd";
 	
 	end;
-	
-/* OnInit:
-	set .reward_id,??;
-	set .reward_amt,??;
-	end; */
 }
