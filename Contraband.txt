@@ -79,6 +79,7 @@ OnEnd:
 
 // Game NPC
 izlude,134,125,4	script	Tam Tam#contraband	1019,{
+	set .contraband19,0;
 	// .phase
 	// 0 = not started, waiting room
 	// 1 = started, introductory phase
@@ -111,6 +112,8 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			set .coin,0;
 			mes "[" + strnpcinfo(1) + "]";
 			mes "You chose not to smuggle anything this round.";
+			.contraband19++;
+			mes ""+ .contraband19;
 			close;
 			
 			case 2:
@@ -136,11 +139,11 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
 			close;
 		}
+		.contraband19++;
 	}
-		if(getcharid(0) == .inspector) {
 			if(getcharid(0) == .inspector) {
-			mes "[" + strnpcinfo(1) + "]";
-			mes "Hi " + strcharinfo(0) + ", here are your details.";
+				mes "[" + strnpcinfo(1) + "]";
+				mes "Hi " + strcharinfo(0) + ", here are your details.";
 			
 			if(.inspector == .player1) {
 				mes "Balance: ^0000FF" + .balance1 + "^000000";
@@ -167,6 +170,8 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			set .doubt,0;
 			mes "[" + strnpcinfo(1) + "]";
 			mes "You are letting the smuggler pass this round.";
+			.contraband19++;
+			mes ""+ .contraband19;
 			close;
 			
 			case 2:
@@ -185,8 +190,36 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			mes "[" + strnpcinfo(1) + "]";
 			mes "Your doubt: ^0000FF" + .doubt + "^000000";
 			close;
+			}
+			
+			
 		}
+		//Fix me - 6/3/2019
+		if(.contraband19 == 2){
+		// Determine result
+		// 1 = No win or loss
+		// 2 = Smuggle success
+		// 3 = Inspector pays indemnity
+		// 4 = Smuggle failure
+		// 5 = Smuggle success, inspector pays indemnity
+		
+		if(!.doubt && !.coin) {
+			set .result,1;
 		}
+		else if(!.doubt && .coin > 0) {
+			set .result,2;
+		}
+		else if(.doubt > 0 && !.coin) {
+			set .result,3;
+		}
+		else if(.doubt > 0 && .coin > 0 && .doubt >= .coin) {
+			set .result,4;
+		}
+		else if(.doubt > 0 && .coin > 0 && .doubt < .coin) {
+			set .result,5;
+		}
+		
+		donpcevent "Tam Tam#contraband::OnResult";
 		}
 	}
 
@@ -200,7 +233,6 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 	switch(select("Join:Quit:Cancel")) {
 		case 1:
 		// Register player info into NPC
-		.play1 = rand(2);
 		if(!.player1) {
 			set .player1,getcharid(0);
 			set .balance1,1000;
@@ -209,7 +241,7 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			close;
 		}
 		else {
-			//Verify players, don't want player 2 starting the minigame twice if they click to join again.
+			//Verify players, don't want the players starting the minigame multiple times if they click to join again.
 			if(getcharid(0) == .player1){ 
 			mes "You already joined!";
 			end;
@@ -218,7 +250,6 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			mes "You already joined!";
 			end;
 			}
-			
 			set .player2,getcharid(0);
 			set .balance2,1000;
 			set .account2,0;
@@ -237,7 +268,6 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			
 			set .phase,1;
 			donpcevent "Tam Tam#contraband::OnWelcome";
-			close;
 			end;
 		}
 		case 2:
@@ -249,7 +279,7 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 	}
 	
 OnWelcome:
-	sleep(3000);
+	sleep(1000);
 	
 	announce "Welcome to Contraband!",bc_all;
 	sleep(4000);
@@ -260,13 +290,13 @@ OnWelcome:
 	announce "Round 1 has started.",bc_all;
 	
 	set .phase,2;
-	initnpctimer;
+	//initnpctimer;
 	
 	set .round,1; // Variable to scale reward value in case of a player disconnects or abandons.
 	
 	end;	
 	
-OnTimer20000:
+/* OnTimer20000:
 	if(.phase == 2) {
 		stopnpctimer;
 		
@@ -303,7 +333,7 @@ OnTimer20000:
 		donpcevent "Tam Tam#contraband::OnResult";
 	}
 	
-	end;
+	end; */
 	
 OnResult:
 	
