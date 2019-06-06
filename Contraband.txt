@@ -3,6 +3,14 @@
 // Programmer: ZoneSoldier
 // ====================================================================================================
 // Warp NPC
+
+/* 
+TODO:
+Rename .contraband19a and .contraband19b
+Areawarp needs rewriting
+rewards need values and items
+*/
+
 izlude,134,145,4	script	Volaren#contraband	1019,{
 	if(.phase) {
 		mes "The game is in progress.";
@@ -66,10 +74,20 @@ OnInit:
 	
 OnStart:
 	disablewaitingroomevent;
+	initnpctimer;
 	set .phase,1;
 	getmapxy(.@map$,.@x,.@y,BL_NPC,"Tam Tam#contraband");
 	warpwaitingpc "izlude",134,124,2;
 	end;
+	
+OnTimer30000:
+	announce "Inactive players, sending back to Volaren.",bc_all;
+	sleep(4000);
+	donpcevent "Volaren#contraband::OnEnd";
+	areawarp "izlude",10,10,120,120,"izlude",134,141;
+	
+OnContinue:
+	stopnpctimer;
 	
 OnEnd:
 	sleep(5000);
@@ -79,8 +97,7 @@ OnEnd:
 }
 
 // Game NPC
-izlude,134,125,4	script	Tam Tam#contraband	1019,{
-	// .phase
+izlude,134,125,4	script	Tam Tam#contraband	1019,{	
 	// 0 = not started, waiting room
 	// 1 = started, introductory phase
 	// 2 = started, decision phase
@@ -109,120 +126,124 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			next;
 			
 			switch(select("Pass:Smuggle")) {
-			case 1:
-			set .coin,0;
-			set .contraband19a,1;
-			mes "[Tam Tam]";
-			mes "You chose not to smuggle anything this round.";
+				case 1:
+					set .coin,0;
+					set .contraband19a,1;
+					mes "[Tam Tam]";
+					mes "You chose not to smuggle anything this round.";
 			
-			if(.contraband19a == .contraband19b){
-			donpcevent "Tam Tam#contraband::OnCheckResult";end;
-			end;
-			}
-			close;
+					if(.contraband19a == .contraband19b){
+						donpcevent "Tam Tam#contraband::OnCheckResult";end;
+						end;
+					}
+					close;
 			
-			case 2:
-			set .contraband19a,1;
-			mes "[Tam Tam]";
-			mes "How much are you smuggling?";
-			next;
-			
-			input .coin;
-			
-			if(.coin < 1 || .coin > 100) {
-				mes "[Tam Tam]";
-				mes "Sorry, you can choose a number between 1 and 100 inclusive.";
+				case 2:
+					set .contraband19a,1;
+					mes "[Tam Tam]";
+					mes "How much are you smuggling?";
+					next;
+				
+					input .coin;
+				
+					if(.coin < 1 || .coin > 100) {
+						mes "[Tam Tam]";
+						mes "Sorry, you can choose a number between 1 and 100 inclusive.";
+						close;
+					}
+				
+					if(.coin > .balance1) {
+						mes "[Tam Tam]";
+						mes "Sorry, you can only smuggle up to " + .balance1 + " coins.";
+						close;
+					}
+				
+					mes "[Tam Tam]";
+					mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
+				
+					if(.contraband19a == .contraband19b){
+						donpcevent "Tam Tam#contraband::OnCheckResult";end;
+					}	
 				close;
 			}
-			
-			if(.coin > .balance1) {
-				mes "[Tam Tam]";
-				mes "Sorry, you can only smuggle up to " + .balance1 + " coins.";
-				close;
-			}
-			
-			mes "[Tam Tam]";
-			mes "You are smuggling ^0000FF" + .coin + "^000000 coins.";
-			
-			if(.contraband19a == .contraband19b){
-			donpcevent "Tam Tam#contraband::OnCheckResult";end;
-			}
-			close;
 		}
-	}
-			//Inspector
-			if(getcharid(0) == .inspector) {
-				mes "[Tam Tam]";
-				mes "Hi " + strcharinfo(0) + ", here are your details.";
-			
+		//Inspector
+		if(getcharid(0) == .inspector) {
+			mes "[Tam Tam]";
+			mes "Hi " + strcharinfo(0) + ", here are your details.";
+		
 			if(.inspector == .player1) {
 				mes "Balance: ^0000FF" + .balance1 + "^000000";
 				mes "Intercepted: ^0000FF" + .account1 + "^000000";
 			}
+			
 			else if(.inspector == .player2) {
 				mes "Balance: ^0000FF" + .balance2 + "^000000";
 				mes "Intercepted: ^0000FF" + .account2 + "^000000";
 			}
-			
+		
 			if(.doubt > 0) {
 				mes "Your doubt: ^0000FF" + .doubt + "^000000";
 			}
-			
-			mes "What would you like to do?";
+		
+			mes "What would you like to do?";	
 			next;
-			
+		
 			switch(select("Pass:Doubt")) {
-			case 1:
-			set .doubt,0;
-			set .contraband19b,1;
-			mes "[Tam Tam]";
-			mes "You are letting the smuggler pass this round.";
-			
-			if(.contraband19a == .contraband19b){
-			donpcevent "Tam Tam#contraband::OnCheckResult"; end;
-			}
-			close;
-			case 2:
-			set .contraband19b,1;
-			mes "[Tam Tam]";
-			mes "How much are you doubting?";
-			next;
-			
-			input .doubt;
-			
-			if(.doubt < 1 || .doubt > 100) {
-				mes "[Tam Tam]";
-				mes "Sorry, you can choose a number between 1 and 100 inclusive.";
-				close;
-			}
-			
-			mes "[Tam Tam]";
-			mes "Your doubt: ^0000FF" + .doubt + "^000000";
-			
-			if(.contraband19a == .contraband19b){
-			donpcevent "Tam Tam#contraband::OnCheckResult";end;
-			}
-			close;
+				case 1:
+					set .doubt,0;
+					set .contraband19b,1;
+					mes "[Tam Tam]";
+					mes "You are letting the smuggler pass this round.";
+		
+					if(.contraband19a == .contraband19b){
+						donpcevent "Tam Tam#contraband::OnCheckResult"; end;
+					}
+					
+					close;
+					
+				case 2:
+					set .contraband19b,1;
+					
+					mes "[Tam Tam]";
+					mes "How much are you doubting?";
+					next;
+					
+					input .doubt;
+		
+					if(.doubt < 1 || .doubt > 100) {
+						mes "[Tam Tam]";
+						mes "Sorry, you can choose a number between 1 and 100 inclusive.";
+						close;
+					}
+		
+					mes "[Tam Tam]";
+					mes "Your doubt: ^0000FF" + .doubt + "^000000";
+		
+					if(.contraband19a == .contraband19b){
+						donpcevent "Tam Tam#contraband::OnCheckResult";end;
+					}
+					close;
 			}
 			
 		}
 	}
-
+	
+	
 	//Inital Start of the game. Each player needs to click on the npc and select "Join" to be assigned their IDs.
 	//Quit will end the game and cancel will let the user close the text box.
-	mes "Tam Tam";
+	mes "[Tam Tam]";
 	mes "Welcome to Contraband!";
 	mes "Please select Join to start the game!";
 	mes "Or select Quit to leave the game and go back to town!";
 	next;
-	switch(select("Join:Quit:Cancel")) {
+	switch(select("Join:Quit")) {
 		case 1:
 		// Register player info into NPC
 		if(!.player1) {
 			set .player1,getcharid(0);
 			set .balance1,1000;
 			set .account1,0;
-			mes "You are Player 1";
 			close;
 		}
 		else {
@@ -234,7 +255,6 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			set .player2,getcharid(0);
 			set .balance2,1000;
 			set .account2,0;
-			mes "You are Player 2";
 			
 			
 			// Roll a dice to select whom to start first
@@ -248,14 +268,14 @@ izlude,134,125,4	script	Tam Tam#contraband	1019,{
 			}
 			
 			set .phase,1;
+			donpcevent "Volaren#contraband::OnContinue";
 			donpcevent "Tam Tam#contraband::OnWelcome";
+			
 			end;
 		}
 		case 2:
 		areawarp "izlude",10,10,120,120,"izlude",134,141; // Not done
-		donpcevent "Tam Tam#contraband::OnEnd";
-		close;
-		case 3:
+		donpcevent "Tam Tam#contraband::OnEnd";end;
 		close;
 	}
 	
@@ -268,23 +288,35 @@ OnWelcome:
 	announce "The game will begin with " + strcharinfo(0,.smuggler) + " as the smuggler and " + strcharinfo(0,.inspector) + " as the custom inspector.",bc_all;
 	sleep(4000);
 	
+	announce "You have 30 seconds to make your choice, if either one of the players doesn't choose by the 30 seconds both players will be kicked from the game.",bc_all;
+	sleep(4000);
+	
 	announce "Round 1 has started.",bc_all;
 	
 	set .phase,2;
 	
-	set .round,1; // Variable to scale reward value in case of a player disconnects or abandons.
+	set .round,1;
+	
+	//Start Timer
+	initnpctimer;
 	
 	end;	
 	
-OnCheckResult:
-
-	// Check abandon status
-	if(strcharinfo(3,.player1) != strnpcinfo(4) || strcharinfo(3,.player2) != strnpcinfo(4)) {
-		if(strcharinfo(3,.player1) == strnpcinfo(4)) set .reward,1;
-		if(strcharinfo(3,.player2) == strnpcinfo(4)) set .reward,2;
-		donpcevent "Tam Tam#contraband::OnReward";
+//Run after 30 seconds, if no player makes an action to the npc it will notify the players and kick them from the game.
+OnTimer30000:
+	if(.phase == 2) {
+		stopnpctimer;
+		announce "Game Canceled due to inactivity.",bc_all;
+		sleep(4000);
+		areawarp "izlude",10,10,120,120,"izlude",134,141; // Not done
+		donpcevent "Tam Tam#contraband::OnEnd";end;
 	}
+	end;
 	
+OnCheckResult:
+	stopnpctimer;
+	set .contraband19a,0;
+	set .contraband19b,0;
 	// Determine result
 	// 1 = No win or loss
 	// 2 = Smuggle success
@@ -307,9 +339,6 @@ OnCheckResult:
 	else if(.doubt > 0 && .coin > 0 && .doubt < .coin) {
 		set .result,5;
 	}
-		
-	set .contraband19a,0;
-	set .contraband19b,0;
 	
 	announce "Round " + .round + " has ended.",bc_all;
 	
@@ -324,6 +353,7 @@ OnCheckResult:
 		announce "However, the smuggler isn't carrying any coins.",bc_all;
 		sleep(4000);
 	}
+	
 	else if(.result == 2) {
 		if(.smuggler == .player1) {
 			set .balance1,.balance1 - .coin;
@@ -342,6 +372,7 @@ OnCheckResult:
 		
 		set .coin,0;
 	}
+	
 	else if(.result == 3) {
 		set .@temp,.doubt / 2;
 		
@@ -369,6 +400,7 @@ OnCheckResult:
 		
 		set .doubt,0;
 	}
+	
 	else if(.result == 4) {
 		if(.smuggler == .player1) {
 			set .account2,.account2 + .coin;
@@ -391,6 +423,7 @@ OnCheckResult:
 		set .doubt,0;
 		set .coin,0;
 	}
+	
 	else if(.result == 5) {
 		set .@temp,.doubt / 2;
 		
@@ -418,57 +451,34 @@ OnCheckResult:
 		set .coin,0;
 		set .result,0;
 	}
-	
 	// Check end game status
-	if(.round == 30 || !.balance1 || !.balance2) {
-		if(.round == 30) {
+	//Game starts at round 0, set variable to 31 to get 30 rounds to display in the chatro.
+	if(.round == 31 || !.balance1 || !.balance2) {
+		if(.round == 31) {
 			set .account1,.account1 + .balance2;
 			set .account2,.account2 + .balance1;
 		}
 		
-		if(.account1 > .account2) set .reward,3;
-		else if(.account1 < .account2) set .reward,4;
-		else if(.account1 == .account2) set .reward,5;
+		if(.account1 > .account2) set .reward,1;
+		else if(.account1 < .account2) set .reward,2;
+		else if(.account1 == .account2) set .reward,3;
 		
 		set .phase,3;
-		donpcevent "Tam Tam#contraband::OnReward";
+		donpcevent "Tam Tam#contraband::OnReward";end;
 	}
 	else {
 		initnpctimer;
+		announce "Round " +.round + " has started",bc_all;	
 	}
-	announce "Round " +.round + " has started",bc_all;	
-	
 	end;
 	
 OnReward:
 	// .reward
-	// 1 = Player 2 abandons, Player 1 receive proportionate reward amount
-	// 2 = Player 1 abandons, Player 2 receive proportionate reward amount
-	// 3 = Player 1 wins
-	// 4 = Player 2 wins
-	// 5 = Tie, both players receive half the reward amount each
+	// 1 = Player 1 wins
+	// 2 = Player 2 wins
+	// 3 = Tie, both players receive half the reward amount each
 	
 	if(.reward == 1) {
-		set .@amount,.reward_amt * .round / 15;
-		
-		announce "" + strcharinfo(0,.player2) + " has abandoned the game.",bc_all;
-		
-		announce "" + strcharinfo(0,.player1) + " shall receive proportionate reward.",bc_all;
-		sleep(4000);
-		
-		getitem .reward_id,.reward_amt,.player1;
-	}
-	if(.reward == 2) {
-		set .@amount,.reward_amt * .round / 15;
-		
-		announce "" + strcharinfo(0,.player1) + " has abandoned the game.",bc_all;
-		
-		announce "" + strcharinfo(0,.player2) + " shall receive proportionate reward.",bc_all;
-		sleep(4000);
-		
-		getitem .reward_id,.@amount,.player2;
-	}
-	if(.reward == 3) {
 		announce "" + strcharinfo(0,.player1) + " has more coins than " + strcharinfo(0,.player2) + "",bc_all;
 		
 		announce "" + strcharinfo(0,.player2) + " has been defeated.",bc_all;
@@ -476,7 +486,8 @@ OnReward:
 		
 		getitem .reward_id,.reward_amt,.player1;
 	}
-	if(.reward == 4) {
+	
+	if(.reward == 2) {
 		announce "" + strcharinfo(0,.player2) + " has more coins than " + strcharinfo(0,.player1) + "",bc_all;
 		
 		announce "" + strcharinfo(0,.player1) + " has been defeated.",bc_all;
@@ -484,7 +495,8 @@ OnReward:
 		
 		getitem .reward_id,.reward_amt,.player2;
 	}
-	if(.reward == 5) {
+	
+	if(.reward == 3) {
 		announce "" + strcharinfo(0,.player1) + " has the same amount of coins as " + strcharinfo(0,.player2) + "",bc_all;
 		
 		announce "It's a tie. Both players shall receive equal reward.",bc_all;
