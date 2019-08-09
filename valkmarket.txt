@@ -1,0 +1,430 @@
+//===== rAthena Script =======================================
+//= TalonRO Valk Market Script
+//===== Event Creator ================================================
+//= GM Lance
+//===== Programmer ===================================================
+//= ZoneSoldier
+//===== Description ==================================================
+//= Map filled with NPCS that trade items for Valkyrie’s Divine (ID: 21190)
+//===== Date =========================================================
+//= 2019/08/06
+//===== End ==========================================================
+
+
+//TODO:
+//Add Kafra NPC to map.
+//Location: paramk 75,88
+//Karfa ID: 90
+
+//Yuno Warp NPC
+yuno,70,125,4	script	Asgardian#valkwarp	480,{
+	if (!countitem(21240)){
+		mes "[Asgardian]";
+		mes "There are tales of an ancient key in which binds travel to and from Valhalla, as well as corresponding trading ports within Asgard..";
+		close;
+	}
+		mes "[Asgardian]";
+		mes "Asgardian: Is that a key in your possession? The trading ports are accessible to those who wield it. Do you wish to travel to Asgard now?";
+		next;
+		
+		if(select("Yes:Not yet...") == 2) {
+			mes "[Asgardian]";
+			mes "Very well.";
+			close;
+		}
+		
+		mes "[Asgardian]";
+		mes "Very well.";
+		close2;
+		warp "paramk",97,9;
+}
+
+//=============================
+//Dialog NPCS
+//=============================
+paramk,66,85,4	script	Valencia Solveig#valkmart	601,{
+	mes "[Valencia Solveig]";
+	mes "Salute! Welcome to Valencia’s Emporium. You can exchange those delightful Valhalla trinkets for store goods. How may I be of service?";
+	next;
+	
+	mes "[Valencia Solveig]";
+	mes "Oh dear.. Unfortunately we’ll need at least 6x unique trinkets to make a trade! We have a range of new Valkyrie armament, weapons, garments along with delightful costumes that are rumoured to summon a powerful Valkyrie when in critical state!";
+	close;
+}
+
+paramk,130,82,4	script	Dahlia Reece#valkmart	643,{
+	mes "[Dahlia Reece]";
+	mes "Eeek! Still working out the kinks. Store’s not ready yet.. Come back to me another time, mm?";
+	next;
+	
+	mes "[Dahlia Reece]";
+	mes "I’ll be able to refine those Valkyrie’s Divine pieces you’ve obtained! I.. Just need to work out the formula. Mhhm.. Hm! Come back later!";
+	next;
+	
+	mes "[Dahlia Reece]";
+	mes "HEY! Stop pressuring me! These things take time, got that?!";
+	next;
+	
+	mes "[Dahlia Reece]";
+	mes "... Grrr.";
+	close;
+}
+
+paramk,107,102,4	script	Layla’s Emporium#valkmart	511,{
+	mes "[Layla’s Emporium]";
+	mes "Zzzz... Nnh... Store’s closed. Zzz... zz...";
+	next;
+	
+	mes "[Layla’s Emporium]";
+	mes "Zzzz... Zzz...Zzz...";
+	close;
+}
+
+paramk,94,88,4	script	Dagon Baen#valkmart	468,{
+	mes "[Dagon Baen]";
+	mes "Should you wield Valkyrie’s Ultimecia, we can open a rift to Odin's dimension. Rumour has it that his presence exists beyond the rifts of time.";
+	next;
+	
+	mes "[Dagon Baen]";
+	mes "You don’t seem to have the required pieces for us to conjure a portal to Odin’s bastion. Come back to me when you’ve obtained 3x Valkyrie’s Ultimecia!";
+	close;
+}
+
+paramk,101,88,4	script	Laurent Strife#valkmart	404,{
+	mes "[Laurent Strife]";
+	mes "With the demise of Nightmare’s Rift, a new scourge has been plaguing Rune Midgard. Thanks to your brave efforts, the disease is now contained. At least, for now..";
+	next;
+	
+	mes "[Laurent Strife]";
+	mes "Your bravery is worthy! The Asgardians are not pleased with our attempt in securing artefacts and advanced technology to aid us in developing a cure.";
+	next;
+	
+	mes "[Laurent Strife]";
+	mes "Best of luck on your expeditions my compatriots!";
+	close;
+}
+
+paramk,99,90,4	script	Kingsguard Alonso#valkmart	605,{
+	mes "[Kingsguard Alonso]";
+	mes "Nine Valkyries, all with their own unique finesse in battle. But with all opponents, comes a weak spot! Bear that in mind when heading into the fray...";
+	next;
+	
+	mes "[Kingsguard Alonso]";
+	mes "Soar onwards to victory, the high council of Prontera bring forth their blessings!";
+	close;
+}
+
+paramk,96,90,4	script	Kingsguard Lucrecia#valkmart	415,{
+	mes "[Kingsguard Lucrecia]";
+	mes "Asgardians are renowned to look down upon the human race. This goes without saying, but please be vigilant on your expeditions to and from these realms. Rumour has it Odin is not pleased with our meddling...";
+	next;
+	
+	mes "[Kingsguard Lucrecia]";
+	mes "May the line shine bright upon your valour this day!";
+	close;
+}
+
+//Warp back to Yuno NPC
+paramk,97,84,4	script	Knight of Lux#valkmart	657,{
+	mes "[Knight of Lux]";
+	mes "Would you like to return to Yuno?";
+	next;
+	
+	if(select("Yes:No") == 2) close;
+	warp "yuno",153,176;
+	end;
+	
+}
+
+paramk,48,105,4	script	Valkyrie Spectre#valkmart	844,{
+	if(!.effectDelay){
+		.effectDelay = 1;
+		specialeffect 622;
+		initnpctimer;
+	}
+	end;
+  
+OnTimer5000:
+	stopnpctimer;
+	.effectDelay = 0;
+	end;
+
+}
+
+
+//=============================
+//Market NPCS
+//=============================
+
+//=============================
+//Currency
+//=============================
+//Valkyrie’s Divine (ID: 21190)
+//=============================
+
+
+/*
+===================================== 
+Murr's Pet Store
+=====================================
+Item -                    ID   - Cost
+Angeling Egg -            9270 - 400
+Baby Skoll Egg -          9289 - 100
+Ballooling Egg -          9261 - 100
+Bandit Egg -              9286 - 100
+Casual Pope -             9275 - 500
+Zipper Bear Egg -         9204 - 100
+Eggring Egg -             9278 - 400
+Elvira Egg -              9277 - 400
+Eremes Guile Egg -        9238 - 400
+Garden Keeper Egg -       9223 - 100
+Lora Egg -                9274 - 300
+Moonlight Flower Egg -    9290 - 300
+Scatleton Egg -           9266 - 300
+Snow Bunny Egg -          9224 - 250
+White Goat Egg -          9237 - 100
+Baby Leopard Egg - 		  9203 - 100
+=====================================
+*/
+paramk,128,33,0	itemshop	Murr’s Pet Store#valkmart	556,21190,9270:400,9289:100,9261:100,9286,100,9275:500,9204:100,9278:400,9277:400,9238:400,9223:100,9274:300,9290:300,9266:300,9224:250,9237:100,9203:100{}
+
+/*
+=============================================== 
+Liete's Elixir Mart
+===============================================
+Item -                    		  ID    -  Cost
+100× Blue Potion Box -	  		  20235 -  5
+200× Condensed White Potion Box - 20233 -  5
+Angeling Potion - 				  12350 -  2
+Large Magical Defence Potion -    14544 -  2
+Large Physical Defence Potion -   14542 -  2
+500× Grape Juice Box - 			  20234 -  1
+Dragon Breath Cocktail Box - 	  13838 -  15
+Drip of Yggdrasil - 			  8955  -  2			
+===============================================
+*/
+paramk,104,33,0	itemshop	Liete’s Elixir Mart#valkmart	558,21190,20235:5,20233:5,12350:2,14544:2,14542:2,20234:1,13838:15,8955:2{}
+
+/*
+====================================== 
+Generalina's Store
+======================================
+Item -                   ID    -  Cost
+Strawberry -             578   -  1
+Old Purple Box -         617   -  2
+Old Card Album -         616   -  15
+Bloody Branch -          12103 -  15
+Chiqita’s Jewelry Box -  8901  -  5
+25× Dead Branch Box -    14234 -  5
+Handmade Chocolate -     559   -  15
+Halter Lead 7 Day Box -  16682 -  7
+Halter Lead 14 Day Box - 16684 -  10
+Halter Lead 30 Day Box - 16663 -  20
+Jewelry Box -            12106 -  10
+=====================================  
+*/
+paramk,116,33,0	itemshop	Generalina’s Store#valkmart	612,21190,578:1,617:2,616:15,12103:15,8901:5,14234:5,559:15,16682:7,16684:10,16663:20,12106:10{}
+
+/*
+=================================================
+Dante's Costume Boutique
+=================================================
+Item -                              ID    -  Cost
+Alchemist Square Bag Costume -      21215 -  900
+Walking Lady Tanee Costume -        21234 -  900
+Blinking Thin Eyes Costume -        20930 -  200
+Cat Ear Ribbon Costume -            21064 -  900
+Happy Angel Wing Costume -          20275 -  500
+Hopping Rabbit Costume -            20810 -  400
+Stall of Angel Costume -            20847 -  500
+Deviruchi Balloon Costume -         20463 -  900
+Eleanor Wig Costume -               20601 -  900           
+Eleanor Yellow Wig Costume -        20970 -  900
+Poring Soap Pipe Costume -          20716 -  400
+Fallen Angel Valletta Costume -     20888 -  200
+Walking Deviling Costume      -     21061 -  600
+Protection Feathers Costume -       20199 -  600
+Gigant Helm Costume -               20267 -  300
+False Ears Costume -                20916 -  300   
+Walking Angeling Costume -          20941 -  600
+Walking White Cat Costume -         20974 -  900
+Mermaid Wig Costume -               21220 -  900
+Royal Mantle Costume -              20935 -  600
+Picnic Basket Costume -             21222 -  900
+Magical Feather Costume -           5930  -  300
+Seraphim Coronet Costume -          20580 -  300
+Blinking Eyes Costume -             20842 -  200
+Protection Cloth Costume -          21041 -  900
+Under Lamp Costume -                20712 -  500
+Walking White Rabbit Costume -      20840 -  900
+Walking Fox Costume -               21142 -  900
+Valkyrie Feather Band Costume -     21014 -  200
+Blue Rear Ribbon Costume -          20581 -  300
+White Rabbit Ear Costume -          20718 -  200
+Classical Feather Hat Costume -     20392 -  300
+Ancient Gold Adornment Costume -    20078 -  200
+Red Horse King Costume -            20997 -  500
+Happy Rabbit Ribbon Costume -       21028 -  500
+Full Bloom Hairpin Costume -        21016 -  200
+Great Dracul Horn Costume -         20933 -  300
+White Cat Ear Costume -             19649 -  300
+=================================================
+*/
+paramk,91,33,0	itemshop	Dante’s Costume Boutique#valkmart	625,21190,21215:900,21234:900,20930:200,21064:900,20275:500,20810:400,20847:500,20463:900,20601:900,20970:900,20716:400,20888:200,21061:600,20199:600,20267:300,20916:300,20941:600,20974:900,21220:900,20935:600,21222:900,5930:300,20580:300,20842:200,21041:900,20712:500,20840:900,21142:900,21014:200,20581:300,20718:200,20392:300,20078:200,200997:500,21028:500,21016:200,20933:300,19649:300{}
+
+/*
+=================================================== 
+Sigil's Armory
+===================================================
+Item -                                ID    -  Cost
+Valkyrja’s Shoes - 					  2421  -  300			
+Diablos Robe[1] -                     2374  -  2000
+Aebecee’s Raging Typhoon Armor[1] -   2349  -  200
+Claytos Cracking Earth Armor[1] -     2351  -  200
+Saphien’s Armor of Ocean[1] -         2347  -  200
+Sniping Suit[1] -                     2367  -  100
+Lucius’s Fierce Armor of Volcano[1] - 2345  -  200
+Sleipnir -                            2410  -  2000
+Valkyrja’s Manteau[1] -               2524  -  400
+Valkyrja’s Shield[1] -                18827 -  750
+Gold Emblem[1] -                      20128 -  750
+Holy Robe[1] - 						  2373  -  200
+===================================================
+*/
+paramk,79,31,0	itemshop	Sigil’s Armory#valkmart	813,21190,2421:300,2374:2000,2349:200,2351:200,2347:200,2367:100,2345:200,2410:2000,2524:400,18827:750,20128:750,2373:200{}
+
+/* 
+=====================================
+Leilani's Weapon Outlet
+=====================================
+Item -                  ID    -  Cost
+Grand Cross[1] -        1540  -  200
+Ballista -              1722  -  100
+Oriental Lute[2] -      1922  -  200
+Queen’s Whip [2] -      1976  -  200
+Spike [2] -             1538  -  100
+Ice Pick [1] -          13017 -  2000
+Wizardry Staff -        1473  -  100
+Tracker’s Dagger[3] -   13038 -  100
+Berserk[1] -            1816  -  200
+Tirfing -               1139  -  100
+Rosevine -              1985  -  100
+Holy Dagger -           1244  -  100
+Rudra Bow -             1720  -  100
+Combat Knife -          1228  -  250
+Survivor’s Rod[1] -     1620  -  200
+War Axe -               1306  -  100
+Gungnir[2] -            1418  -  200
+=====================================
+*/
+paramk,67,32,0	itemshop	Leilani’s Weapon Outlet#valkmart	430,21190,1540:200,1722:100,1922:200,1976:200,1538:100,13017:2000,1473:100,13038:100,1816:200,1139:100,1985:100,1244:100,1720:100,1228:250,1620:200,1306:100,1418:200{}
+
+/*
+=====================================
+Feena's Bazaar
+=====================================
+Item -                  ID    -  Cost
+Box of Chocolates -     20775 -  3  
+Box of Sunlight -       12033 -  10
+Box of Thunder -        12028 -  1
+Field Manual Box -      13598 -  20
+Guyak Candy -           12709 -  1
+Guyak Pudding -         12710 -  1
+Taming Gift Set -       12105 -  2
+Yggdrasil Berry Box -   14232 -  2
+=====================================
+*/
+paramk,68,102,4	itemshop	Feena’s Bazaar#valkmart	621,21190,20775:3,12033:10,12028:1,13598:20,12709:1,12710:1,12105:2,14232:2{}
+
+/*
+=============================
+Barmund's Workshop
+=============================
+Item -          ID    -  Cost
+Elunium Box -   13889 -  5
+Oridecon Box -  12998 -  3
+=============================
+*/
+paramk,77,102,4	itemshop	Barmund’s Workshop#valkmart	654,21190,13889:5,12998:3{}
+
+/*
+======================================
+Deviruchi's Grub
+======================================
+Item -                   ID    -  Cost
+Lv10 Food Bundle. -      20133 -  125
+TalonRO Cake -           20062 -  20
+======================================
+*/
+paramk,87,101,4	itemshop	Deviruchi’s Grub#valkmart	738,21190,20133:125,20062:20{}
+
+/*
+===============================================
+Kur's Scroll Booth
+===============================================
+Item -                            ID    -  Cost
+Adrenaline Rush Scroll Box 50 -   13587 -  40
+Aspersio Scroll Box 50 -          13591 -  25
+Assumptio Scroll Box 10 -         12916 -  40
+Blessing Scroll Box 50.  -        13585 -  50 
+Evasion Scroll -                  14530 -  5
+Greed Scroll Box (30) -           13621 -  25
+Increase Agility Box 50 . -       13577 -  40
+Level 10 Wind Walk Scroll -       12219 -  1
+Mystical Amplification Scroll -   14593 -  1
+Lex Aeterna Scroll -              14515 -  2
+Quagmire Scroll Box 10 -          14224 -  10
+Repair Weapon Scroll -            14521 -  3
+Storm Gust Scroll Box 10 -        13539 -  15
+Lord of Vermilion Scroll Box 10 - 13540 -  15
+Meteor Storm Scroll Box 10 -      13538 -  15
+===============================================
+*/
+paramk,97,101,4	itemshop	Kur’s Scroll Booth#valkmart	832,21190,13587:40,13591:25,12916:40,13585:50,14530:5,13621:25,13577:40,12219:1,14593:1,14515:2,14224:10,14521:3,13539:15,13540:15,13538:15{}
+
+/*
+===============================================
+Riri's Depot
+===============================================
+Item -                            ID    -  Cost
+Azul’s Moosey Knapsack -		  20893 -  75	
+Boreas’ Doom Crate -  			  20907 -  75	
+Cherri’s Important Scrap Box -    20911 -  75
+Copal’s Masquerade Box - 		  20912 -  75	
+Elixia’s Flower Elysium -  		  20898 -  75
+Havoc’s Pandora Box -			  20910 -  75
+Howl’s Pandemonium Box -		  20906 -  75
+Kuma’s Honey Pot -   			  20904 -  75	
+Lance’s Royal Hamper -   		  20900 -  75	
+Luna’s Blazing Special - 		  20903 -  75
+Mimi’s Kitten Caboodle - 		  20895 -  75
+Naus’ Battlement Box -  		  20909 -  75
+Phoenix’ Nintendo Wii - 		  20901 -  75	
+Radius’ Blue Box - 				  20892 -  75
+Rainbow’s Pot of Gold - 		  20897 -  75	
+Saen’s Secret Stash - 			  20899 -  75	
+Seiren’s Grand Chest - 			  20905 -  75   
+Shiris’ Pouch of Quill -  		  20908 -  75	
+Sonder’s Wonder Ponder Box - 	  20902	-  75
+Spica’s Starlight Box -  		  20896 -  75		
+Zelda’s Tri Box -				  20894 -  75	
+===============================================
+*/
+paramk,116,100,4	itemshop	Riri’s Depot#valkmart	704,21190,20893:75,20907:75,20911:75,20912:75,20898:75,20910:75,20906:75,20904:75,20900:75,20903:75,20895:75,20909:75,20901:75,20892:75,20897:75,20899:75,20905:75,20908:75,20902:75,20896:75,20894:75{}
+
+/*
+=====================================
+Waifu's Goods
+=====================================
+Item -                  ID    -  Cost
+Celebration Ring -      2361  -  2000
+Old Orange Box -        8815  -  50
+Gift Box -              644   -  1
+Taming Gift Set - 		12105 -  1
+Summer Event Suit - 	12660 -  5 
+Santa’s Bag - 			12132 -  5
+Hanbok Bag - 			20783 -  5
+Poison Bottle Box -     13973 -  50
+=====================================
+*/
+paramk,128,99,4	itemshop	Waifu’s Goods#valkmart	586,21190,2361:2000,8815:50,644:1,12105:1,12660:5,12132:5,20783:5,13973:50{}
